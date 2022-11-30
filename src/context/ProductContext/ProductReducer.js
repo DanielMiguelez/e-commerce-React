@@ -1,4 +1,4 @@
-const app = (state, action) => {
+const products = (state, action) => {
     switch (action.type) {
         case "LOADING":
             return {
@@ -21,4 +21,4 @@ const app = (state, action) => {
             return state;
     }
 };
-export default app;
+export default products;

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import AppReducer from "./AppReducer"
+import ProductReducer from "./ProductReducer"
 import axios from "axios"
 
 const initialState = {
@@ -9,10 +9,10 @@ const initialState = {
 }
 
 
-export const GlobalContext = createContext(initialState);
+export const ProductContext = createContext(initialState);
 
-export const GlobalProvider = ({children}) => {
-    const [state, dispatch] = useReducer(AppReducer, initialState);
+export const ProductProvider = ({children}) => {
+    const [state, dispatch] = useReducer(ProductReducer, initialState);
     const url = 'http://localhost:3001';
 
     const getCategories = async () => {
@@ -36,7 +36,6 @@ export const GlobalProvider = ({children}) => {
         });
         try {
             const res = await axios.get(`${url}/products/getProductsQuery?name=${name}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&priceOrder=${priceOrder}`);
-            console.log(res);
             dispatch({
                 type: "GET_PRODUCTS",
                 payload: res.data.results
@@ -47,7 +46,7 @@ export const GlobalProvider = ({children}) => {
     };
 
     return ( 
-        <GlobalContext.Provider value = {
+        <ProductContext.Provider value = {
             {
                 loading: state.loading,
                 categories: state.categories,
@@ -57,7 +56,7 @@ export const GlobalProvider = ({children}) => {
             }
         } >
             {children} 
-        </GlobalContext.Provider>
+        </ProductContext.Provider>
     );
 
 }

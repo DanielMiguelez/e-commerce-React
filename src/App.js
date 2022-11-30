@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { GlobalProvider } from "./context/GlobalState";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Login/Login";
@@ -9,11 +8,12 @@ import Profile from "./components/Profile/Profile";
 import Products from "./components/Products/Products";
 import Cart from "./components/Cart/Cart";
 import Home from "./components/Home/Home";
+import { ProductProvider } from "./context/ProductContext/ProductState";
 
 function App() {
   return (
     <div className="App">
-      <GlobalProvider>
+      <ProductProvider>
         <BrowserRouter>
           <Header />
           <main>
@@ -28,7 +28,7 @@ function App() {
           </main>
           <Footer />
         </BrowserRouter>
-      </GlobalProvider>
+      </ProductProvider>
     </div>
   );
 }
