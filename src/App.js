@@ -8,10 +8,14 @@ import Profile from "./components/Profile/Profile";
 import Products from "./components/Products/Products";
 import Cart from "./components/Cart/Cart";
 import Home from "./components/Home/Home";
+import { UserProvider } from './context/UserContext/UserState';
+
+
 
 function App() {
   return (
-    <div >
+    <div className="App">
+    <UserProvider>
       <BrowserRouter>
         <Header />
         <main>
@@ -25,6 +29,7 @@ function App() {
           </Routes>
         </main>
       </BrowserRouter>
+    </UserProvider>
       <Footer />
     </div>
   );

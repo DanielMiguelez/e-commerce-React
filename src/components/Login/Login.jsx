@@ -1,88 +1,56 @@
-import React, {useState, useEffect} from 'react'
-import './Login.scss'
+import React, { useState, useEffect } from "react";
+import "./Login.scss";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext/UserState";
+import { Form, Input, Button } from 'antd';
 import { useNavigate } from "react-router-dom";
 
-
 const Login = () => {
-  let navigate = useNavigate();
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [message, setMessage] = useState("");
-  const [visible, setVisible] = useState(true);
-  const [data, setData] = useState({
-    email: "",
-    password: "", 
-  });
-
-  const initialState = {
-    email: "",
-    password: "",
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
+  const onFinish = (values) => {
+    login(values);
+  };
+  const onFinishFailed = (values) => {
+    login(values);
   };
 
-  const clearState = () => {
-    setData({ ...initialState });
-  };
-
-  useEffect(() => {
-    if (data.email == "") {
-      setMessage("It has to be a valid e-mail, please 👎.");
-      setBtnDisabled(true);
-    } else if (data.password.length < 8) {
-      setMessage("password must be at least 8 characters");
-      setBtnDisabled(true);
-    } else {
-      setMessage(null);
-      setBtnDisabled(false);
-    }
-  }, [data]);
-
-  const handleInputChange = (event) => {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    localStorage.setItem("user", JSON.stringify(data));
-    clearState();
-    setTimeout(() => {
-      navigate("/products");
-    }, 3000);
-    setVisible(false);
-  };
 
   return (
-    <>
-    
-      <div><span>Login here</span> 🧑🏼‍💻</div>
-      <form onSubmit={handleSubmit}>
-      <fieldset >
-        <input
-          type="email"
-          placeholder="insert your E-mail"
-          value={data.email}
-          onChange={handleInputChange}
+    <div className="container">
+      <Form
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Email"
           name="email"
-        />
-        <input
-          type="text"
-          placeholder="insert your password"
-          value={data.password}
-          onChange={handleInputChange}
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Password"
           name="password"
-        />
-        <button type="submit" disabled={btnDisabled}>
-          Log in with your user
-        </button>
-        </fieldset>
-       
-      </form>
-      {<p>{visible ? message : "Redirecting you to products..."}</p>}
-    </>
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
-  
 };
 
-
-export default Login
+export default Login;
