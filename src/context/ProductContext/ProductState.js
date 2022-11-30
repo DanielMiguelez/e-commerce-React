@@ -21,7 +21,6 @@ export const ProductProvider = ({children}) => {
         });
         try {
             const res = await axios.get(`${url}/categories/getCategories`);
-            console.log(res)
             dispatch({
                 type: "GET_CATEGORIES",
                 payload: res.data
