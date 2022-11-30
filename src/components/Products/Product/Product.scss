@@ -1,0 +1,40 @@
+.product-card {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+    width: 24%;
+    margin: 0.5%;
+    padding: 0 10px;
+    cursor: pointer;
+
+    .product-img {
+        display: flex;
+        justify-content: center;
+
+        .card-img {
+            width: 75%;
+            margin: 30px 0;
+        }
+    }
+
+    .product-name {
+        font-weight: 300;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 24px;
+        font-weight: 300;
+        color: whitesmoke;
+        text-align: right;
+        margin-top: auto;
+        margin-bottom: 10px;
+        background-color: #270057;
+        padding: 0 10px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    .checked {
+        color: orange;
+    }
+}

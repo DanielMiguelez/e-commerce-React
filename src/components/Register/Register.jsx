@@ -28,19 +28,19 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (data.name == "") {
+    if (data.name === "") {
       setMessage("Fill your name, please.");
       setBtnDisabled(true);
-    }else if (data.surname.length == "") {
+    }else if (data.surname.length === "") {
       setMessage("write your surname, please");
       setBtnDisabled(true);
     } else if (data.password.length < 8) {
       setMessage("password must be at least 8 characters");
       setBtnDisabled(true);
-    }else if (data.city.length == "") {
+    }else if (data.city.length === "") {
       setMessage("Fill the city field, please");
       setBtnDisabled(true);
-     } else if (data.email == "") {
+     } else if (data.email === "") {
       setMessage("Fill your email, please");
       setBtnDisabled(true);
      } else {
