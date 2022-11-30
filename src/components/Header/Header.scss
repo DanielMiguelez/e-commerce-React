@@ -1,6 +1,7 @@
 header{
-    background-color: aqua;
+    background: linear-gradient(90deg, rgba(214,16,16,1) 0%, rgba(0,29,255,1) 50%, rgba(174,20,210,1) 100%);
     height: 8vh;
+    margin-bottom: 4vh;
     
     nav{
         display: flex;
@@ -8,4 +9,27 @@ header{
         align-items: center;
         height: 100%;
     }
+    a{
+       all: unset;
+       cursor: pointer;
+       
+    &:hover{
+        color: yellowgreen;
+    }
+    }
+    button{
+        margin: 1vh;
+        padding: 5px;
+        background-color: rgb(151, 120, 181);
+        border: 1px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            background-color: rgb(116, 172, 153);
+            color: grey;
+        }
+    }
+    
+    
 }
