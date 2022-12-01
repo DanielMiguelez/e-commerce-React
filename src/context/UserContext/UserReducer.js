@@ -12,9 +12,22 @@ const users = (state, action) => {
         user: action.payload,
       };
 
+    case "LOGOUT":
+      return {
+        ...state,
+        user: null,
+        token: null,
+      };
+
+      case "REGISTER":
+      return {
+        ...state,
+        user: action.payload,
+        token: null,
+      };
+
     default:
       return state;
-      
   }
 };
 

@@ -1,2 +1,9 @@
-
-
+#basic{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-left: -70px;
+}
+.input1{
+    width:400px;
+}

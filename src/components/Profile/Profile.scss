@@ -1,0 +1,14 @@
+.site-card-border-less-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardprofile{
+    background-color: rgb(169, 202, 202);
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 4px 4px rgb(74, 64, 64);
+}

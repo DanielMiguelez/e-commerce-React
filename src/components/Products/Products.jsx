@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ProductContext } from '../../context/ProductContext/ProductState';
+import React, { useContext, useEffect, useState } from "react";
+import { ProductContext } from "../../context/ProductContext/ProductState";
 import Product from "./Product/Product";
-import './Products.scss'
+import "./Products.scss";
 
 const Products = () => {
-  const { getCategories, getProducts, categories } = useContext(ProductContext);
-  const [ search, setSearch ] = useState('');
+  const { getCategories, getProducts, categories, cart } = useContext(ProductContext);
+  const [search, setSearch] = useState("");
   const [ minPrice, setMinPrice ] = useState(1);
   const [ maxPrice, setMaxPrice ] = useState(9999);
 
-  const categoriesList = categories.map(category => <li key={category.id}>{category.name}</li>)
+  const categoriesList = categories.map((category) => (
+    <li key={category.id}>{category.name}</li>
+  ));
 
   useEffect(() => {
     getCategories();
@@ -60,7 +62,7 @@ const Products = () => {
     e.preventDefault();
     const input = e.target;
     if(input.value === '') {
-      setMaxPrice(9999);
+      setMaxPrice(1);
       return;
     }
     if(parseInt(input.value) < minPrice)
@@ -106,17 +108,24 @@ const Products = () => {
             </div>
           </div>
         </div>
-        <div className='products'>
+        <div className="products">
           <form>
-            <input type='text' className='search' placeholder='Search a product...' value={search} onChange={(e) => setSearch(e.target.value)}/>
+            <input
+              type="text"
+              className="search"
+              placeholder="Search a product..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </form>
-          <div className='products-container'>
+
+          <div className="products-container">
             <Product />
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
