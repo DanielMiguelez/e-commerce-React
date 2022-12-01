@@ -3,7 +3,7 @@ import "./Home.scss";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home">
       <h1>Backend HOME</h1>
       <div className="infohome">
       <p>
@@ -12,6 +12,9 @@ const Home = () => {
         delectus officia voluptas dignissimos ab quae sequi velit recusandae ad
         facilis!
       </p>
+      <br />
+      <hr />
+      <br />
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi expedita
         dolorem modi nam sequi quia, autem exercitationem voluptatum in iste a

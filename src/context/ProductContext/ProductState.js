@@ -6,6 +6,7 @@ const initialState = {
     loading: false,
     categories: [],
     products: []
+
 }
 
 
@@ -45,6 +46,8 @@ export const ProductProvider = ({children}) => {
             console.error(error)
         }
     };
+
+    
 
     return ( 
         <ProductContext.Provider value = {
