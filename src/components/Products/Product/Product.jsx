@@ -3,7 +3,7 @@ import { ProductContext } from '../../../context/ProductContext/ProductState.js'
 import './Product.scss'
 
 const Product = () => {
-  const { products } = useContext(ProductContext);
+  const { products, addCart} = useContext(ProductContext);
 
   const getInfoRating = (product) => {
     const number_reviews = product.Reviews.length;
@@ -29,6 +29,8 @@ const Product = () => {
     }
   }
 
+  
+
   const productCards = products.map(product => {
     return (
       <div className='product-card' key={product.id}>
@@ -36,6 +38,7 @@ const Product = () => {
         <div className="product-name">{product.name}</div>
         { getReviewsStar(product) }
         <div className="product-price">{product.price}$</div>
+        <button onClick={() => addCart(product)}>Add Cart</button>
       </div>
     )
   })
