@@ -9,6 +9,7 @@ const Register = () => {
   const navigate = useNavigate()
   const onFinish = (values) => {
     register(values);
+    navigate("/products")
   };
  
   /*useEffect(() => {
@@ -69,10 +70,10 @@ const Register = () => {
           rules={[{ 
             required: true,
             type: "password",
-            message: "Please input your name!" 
+            message: "Please repeat the password!" 
           }]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

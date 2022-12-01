@@ -38,7 +38,6 @@ export const UserProvider = ({ children }) => {
         },
       }
     );
-    console.log(res);
     dispatch({
       type: "GET_USER_INFO",
 
@@ -72,14 +71,12 @@ export const UserProvider = ({ children }) => {
 
   const register = async (user) => {
     const res = await axios.post(API_URL + "/users/createUser", user);
-    
+
     dispatch({
-    type: "REGISTER", 
-    payload: res.data,
+      type: "REGISTER",
+      payload: res.data,
     });
-    if (res.data) {
-    localStorage.setItem("token", JSON.stringify(res.data.token));
-    }}
+  };
 
   return (
     <UserContext.Provider
@@ -89,7 +86,7 @@ export const UserProvider = ({ children }) => {
         login,
         logout,
         getUserInfo,
-        register
+        register,
       }}
     >
       {children}
