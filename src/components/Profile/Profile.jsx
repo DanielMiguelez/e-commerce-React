@@ -3,7 +3,8 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext/UserState";
 import "./Profile.scss";
-
+import { Card, Button } from 'antd';
+import {UserOutlined, MailOutlined} from "@ant-design/icons"
 
 const Profile = () => {
   const { getUserInfo, user, logout, register } = useContext(UserContext);
@@ -23,9 +24,22 @@ const Profile = () => {
     return <span>Cargando...</span>;
   }
   return (
-    <div>
-      Profile {user.name}
-      <button onClick={logoutUser}>Logout</button>
+    
+    <div className="site-card-border-less-wrapper">
+<Card className="cardprofile"
+      title=  {user.name}
+      bordered={true}
+      style={{
+        width: 210,
+        border: "2px solid green",
+      }}
+    >
+      <p><MailOutlined/> {user.email}</p>
+      <br />
+      <p> <UserOutlined /> {user.role}</p>
+
+    </Card>
+      <Button onClick={logoutUser}>Logout</Button>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { OrderContext } from "../../context/OrderContext/OrderState";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Cart.scss";
+import { Card, Button } from "antd";
 
 const Cart = () => {
   const { cart, clearCart, createOrder } = useContext(ProductContext);
@@ -20,17 +21,28 @@ const Cart = () => {
 
   const cartItem = cart.map((cartItem, i) => {
     return (
-      <div className="cart" key={i}>
-        <span>{cartItem.name}</span>
-        <span>{cartItem.price.toFixed(2)} €</span>
+      <div className="productcardspace">
+        <Card
+          className="cardproduct"
+          title={cartItem.name}
+          bordered={true}
+          style={{
+            width: 250,
+            border: "2px solid black",
+          }}
+        >
+          <p> {cartItem.price.toFixed(2)} €</p>
+          <br />
+          <p> {cartItem.description} €</p>
+        
+        </Card>
       </div>
     );
   });
-
   return (
     <div>
-      {cartItem} <button onClick={() => clearCart()}>Clear cart</button>
-      <button onClick={() => createNewOrder()}>Create Order</button>
+      {cartItem} <Button onClick={() => clearCart()}>Clear cart</Button>
+      <Button onClick={() => createNewOrder()}> Create Order</Button>
     </div>
   );
 };
