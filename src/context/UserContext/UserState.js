@@ -71,11 +71,16 @@ export const UserProvider = ({ children }) => {
 
   const register = async (user) => {
     const res = await axios.post(API_URL + "/users/createUser", user);
+    if (res.data.ok === false){
+      return(res.data.msg)
+    }else{
+      dispatch({
+        type: "REGISTER",
+        payload: res.data,
 
-    dispatch({
-      type: "REGISTER",
-      payload: res.data,
-    });
+      });
+        return("")
+    }
   };
 
   return (
