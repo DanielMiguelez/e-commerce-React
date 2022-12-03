@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import { ProductContext } from '../../../context/ProductContext/ProductState.js';
 import './Product.scss'
+import { useNavigate } from 'react-router-dom';
+
 
 const Product = () => {
-  const { products, addCart} = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
+  const navigate = useNavigate();
 
   const getInfoRating = (product) => {
     const number_reviews = product.Reviews.length;
@@ -29,16 +32,19 @@ const Product = () => {
     }
   }
 
+  const goProductOverview = (id) => {
+    navigate(`/product-overview/${id}`)
+  }
+
   
 
   const productCards = products.map(product => {
     return (
-      <div className='product-card' key={product.id}>
+      <div className='product-card' onClick={() => goProductOverview(product.id)} key={product.id}>
         <div className="product-img"><img className="card-img" src={'http://localhost:3001/' + product.img_product} alt='Product' /></div>
         <div className="product-name">{product.name}</div>
         { getReviewsStar(product) }
         <div className="product-price">{product.price}$</div>
-        <button onClick={() => addCart(product)}>Add Cart</button>
       </div>
     )
   })

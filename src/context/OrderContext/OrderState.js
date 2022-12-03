@@ -1,10 +1,10 @@
 import { createContext } from "react";
 import axios from "axios";
-const API_URL = "http://localhost:3000";
+
 export const OrderContext = createContext();
 
-
 export const OrdersProvider = ({ children }) => {
+  const API_URL = "http://localhost:3001";
   const createOrder = async (order) => {
     const token = JSON.parse(localStorage.getItem("token"));
     try {

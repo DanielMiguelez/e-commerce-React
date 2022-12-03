@@ -10,16 +10,16 @@ const Header = () => {
   return (
     <header>
       <nav>
-            <Link to="/"> Home <HomeOutlined /> </Link>
-            <Link to="/products"> Products <ShopOutlined /> </Link>
-            <Link to="/cart">Cart<ShoppingCartOutlined /></Link>
-          <div>
+            <Link to="/"><span className='link-header'> Home <HomeOutlined /> </span></Link>
+            <Link to="/products"><span className='link-header'> Products <ShopOutlined /> </span></Link>
+            <Link to="/cart"><span className='link-header'>Cart<ShoppingCartOutlined /></span></Link>
+          <div className='d-flex'>
             {
                 token 
                 ?  <Link to="/profile">Profile <UserOutlined /></Link>
 
-                : <><Link to="/register"><button>Register <UserAddOutlined /></button></Link>
-                <Link to="/login"><button>Login <UserOutlined /></button></Link> </>
+                : <><Link to="/register"><button className="d-flex align-items-center">Register <UserAddOutlined className='pl-2' /></button></Link>
+                <Link to="/login"><button className="d-flex align-items-center">Login <UserOutlined className='pl-2' /></button></Link> </>
             }
            
           </div>

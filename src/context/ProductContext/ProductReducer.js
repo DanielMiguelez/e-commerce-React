@@ -17,6 +17,12 @@ const products = (state, action) => {
         products: action.payload,
         loading: false,
       };
+    case "GET_PRODUCT":
+      return {
+        ...state,
+        product: action.payload,
+        loading: false,
+      };
     case "ADD_CART":
       return {
         ...state,

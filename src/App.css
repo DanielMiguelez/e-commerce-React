@@ -8,3 +8,7 @@ main{
     min-height: 87vh;
     
 }
+
+.checked {
+    color: orange;
+}

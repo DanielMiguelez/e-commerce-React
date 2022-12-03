@@ -13,6 +13,7 @@ import Home from "./components/Home/Home";
 import { ProductProvider } from "./context/ProductContext/ProductState";
 import { UserProvider } from "./context/UserContext/UserState";
 import { OrdersProvider } from "./context/OrderContext/OrderState";
+import ProductOverview from "./components/ProductOverview/ProductOverview";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                   <Route path="/register" element={<Register />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/products" element={<Products />} />
+                  <Route path="/product-overview/:id" element={<ProductOverview />} />
                   <Route path="/cart" element={<Cart />} />
                 </Routes>
               </main>

@@ -4,6 +4,7 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
+  product: null,
   categories: [],
   products: [],
   cart: [],
@@ -59,11 +60,29 @@ export const ProductProvider = ({ children }) => {
       payload: product,
     });
   };
+
   const clearCart = () => {
     dispatch({
       type: "CLEAR_CART",
     });
   };
+
+  const getProduct = async (id) => {
+    dispatch({
+      type: "LOADING",
+    });
+    try {
+      const res = await axios.get(
+        `${url}/products/getProductById/id/${id}`
+      );
+      dispatch({
+        type: "GET_PRODUCT",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  } 
 
   const createOrder = async (order) => {
     try {
@@ -93,12 +112,14 @@ export const ProductProvider = ({ children }) => {
         loading: state.loading,
         categories: state.categories,
         products: state.products,
+        product: state.product,
+        cart: state.cart,
         getCategories,
         getProducts,
         addCart,
         clearCart,
         createOrder,
-        cart: state.cart,
+        getProduct
       }}
     >
       {children}

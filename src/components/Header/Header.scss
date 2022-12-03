@@ -9,12 +9,19 @@ header{
         height: 100%;
     }
     a{
-       all: unset;
-       cursor: pointer;
+        all: unset;
+        cursor: pointer;
+        color: white;
+
+        .link-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
        
-    &:hover{
-        color: yellowgreen;
-    }
+        &:hover{
+            color: yellowgreen;
+        }
     }
     button{
         margin: 1vh;
@@ -23,6 +30,7 @@ header{
         border: 1px solid black;
         border-radius: 5px;
         cursor: pointer;
+        gap: 5px;
 
         &:hover{
             background-color: rgb(116, 172, 153);
