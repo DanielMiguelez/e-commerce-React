@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { Image } from 'antd';
 import "./ProductOverview.scss";
+import ProductReviews from "./ProductReviews/ProductReviews";
 
 const ProductOverview = () => {
     const { id } = useParams();
@@ -75,12 +76,16 @@ const ProductOverview = () => {
                             {product ? product.price : null}$
                         </span>
                         <button
-                            className="add-cart align-self-center"
+                            className="add-cart align-self-center btn btn-primary"
                             onClick={() => addCart(product)}
                         >
                             Add Cart
                         </button>
                     </div>
+                </div>
+                <div className="reviews mt-4 d-flex flex-column">
+                    <span className="reviews-header">Reviews</span>
+                    { product ? <ProductReviews /> : null}
                 </div>
             </div>
         </div>

@@ -59,7 +59,7 @@ const SidebarFilters = (props) => {
     };
 
     const categoriesList = categories_filter.map((category) => (
-        category.id === filters.categoryActive ? <li  className="category-selected" key={category.id} id={'category' + category.id} onClick={categoryClick}>{category.name}</li> : <li key={category.id} id={'category' + category.id} onClick={categoryClick}>{category.name}</li>
+        category.id === filters.categoryActive ? <li className="category-selected" key={category.id} id={'category' + category.id} onClick={categoryClick}>{category.name}</li> : <li key={category.id} id={'category' + category.id} onClick={categoryClick}>{category.name}</li>
     ));
 
   return (

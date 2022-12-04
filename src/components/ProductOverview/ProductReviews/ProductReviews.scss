@@ -1,0 +1,38 @@
+.user-review {
+    margin: 20px;
+    .header {
+        gap: 20px;
+
+        .author {   
+            font-weight: bold;
+        }
+    }
+
+    .content {
+        margin: 10px 30px;
+    }
+}
+
+.form-writeReview {
+    padding: 20px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .rating-review {
+        display: flex;
+        justify-content: center;
+        padding: 5px 0;
+        gap: 10px;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .buttons-review {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}

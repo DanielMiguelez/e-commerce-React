@@ -75,6 +75,7 @@ export const ProductProvider = ({ children }) => {
       const res = await axios.get(
         `${url}/products/getProductById/id/${id}`
       );
+      console.log(res.data);
       dispatch({
         type: "GET_PRODUCT",
         payload: res.data,
@@ -105,6 +106,32 @@ export const ProductProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+  const createReview = async (content, rating, product_id) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      const res = await axios.post( 
+        `${url}/reviews/createReview`,
+        {content, rating, product_id},
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+
+      // dispatch({
+      //   type: "CREATE_REVIEW",
+      //   payload: res.data,
+      // });
+
+    } 
+    
+    catch (error) {
+      console.error(error);
+    }
+  };
  
   return (
     <ProductContext.Provider
@@ -119,6 +146,7 @@ export const ProductProvider = ({ children }) => {
         addCart,
         clearCart,
         createOrder,
+        createReview,
         getProduct
       }}
     >
