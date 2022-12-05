@@ -1,7 +1,9 @@
-footer{
+
+.divfooter2{
+    display: flex;
     height: 5vh;
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,196,255,1) 50%, rgba(228,0,255,1) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(90deg, rgb(41, 54, 170) 0%, rgb(168, 171, 193) 50%, rgb(39, 30, 170) 100%);
 }

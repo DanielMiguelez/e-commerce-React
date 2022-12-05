@@ -41,7 +41,7 @@ const Profile = () => {
       <p><MailOutlined/> {user.email}</p>
       <br />
       <p> <UserOutlined /> {user.role}</p>
-
+      
     </Card>
       <Button onClick={logoutUser}>Logout</Button>
     </div>

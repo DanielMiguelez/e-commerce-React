@@ -1,40 +1,43 @@
 import React from "react";
 import "./Home.scss";
-
+import {TwitterOutlined, InstagramOutlined,WhatsAppOutlined, FacebookOutlined , YoutubeOutlined } from "@ant-design/icons"
+import Carousel1 from "./Carousel1";
 const Home = () => {
   return (
     <div className="home">
-      <h1>Backend HOME</h1>
-      <div className="infohome">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque non
-        laborum, officiis quaerat quos, labore ducimus modi obcaecati nobis
-        delectus officia voluptas dignissimos ab quae sequi velit recusandae ad
-        facilis!
-      </p>
-      <br />
+      <h2>Most viewed products</h2>
+      <Carousel1/>
       <hr />
-      <br />
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi expedita
-        dolorem modi nam sequi quia, autem exercitationem voluptatum in iste a
-        alias obcaecati nobis quam inventore maxime numquam delectus deleniti
-        magni? Voluptatem, eum in eaque quaerat quam expedita vero iusto
-        corrupti pariatur ullam modi commodi accusantium, doloremque itaque quo.
-        Dolorem?
-      </p>
-      <div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-          explicabo dolor doloremque magni aperiam maxime corporis in tempore
-          sapiente magnam delectus fugiat, blanditiis natus. Aut iure at
-          consequuntur adipisci blanditiis error et ducimus, libero doloribus
-          quibusdam soluta? Porro autem sed officia eum ipsum facilis voluptatum
-          temporibus nesciunt, nisi enim libero placeat facere delectus dolorum
-          itaque omnis, vitae fugit doloremque exercitationem.
-        </p>
-        </div>
-      </div>
+      <div className='footerdiv'>
+  <div className='item1'>
+    <h4>Categories</h4>
+    <hr />
+    <ul>
+      <li>Computer Peripherals</li>
+      <li>Components & storage</li>
+      <li>Gaming</li>
+      <li>Networking</li>
+      <li>Software & services</li>
+      <li>Computer System</li>
+    </ul>
+    </div>
+  
+    <div className='item2'>
+    <h4>About</h4>
+    <br />
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam sint in aperiam eaque, nobis illo modi quo itaque explicabo aliquam rem deleniti et quod error. Magnam magni consequuntur ipsum omnis excepturi enim maiores, adipisci distinctio quas. Doloribus similique voluptatibus autem.
+    </div>
+
+    <div className='item3'>
+    <h4>Contact Us</h4>
+      <p><TwitterOutlined/> Twitter</p>
+      <p><InstagramOutlined /> Instagram</p>
+      <p><WhatsAppOutlined /> Whatsapp </p>
+      <p><FacebookOutlined />Facebook</p>
+      <p><YoutubeOutlined /> Youtube</p>
+     
+    </div>
+</div >
     </div>
   );
 };

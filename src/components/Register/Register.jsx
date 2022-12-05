@@ -25,6 +25,8 @@ const Register = () => {
 
   return (
     <div className="container">
+        <h4>Register yourself!</h4>
+        <br />
       <Form
         name="register"
         labelCol={{ span: 8 }}
@@ -33,7 +35,7 @@ const Register = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <h4>Register yourself!</h4>
+      
         <Form.Item 
           label="Name"
           name="name"
