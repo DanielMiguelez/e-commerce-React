@@ -4,6 +4,17 @@
    align-items: center;
    margin-left: -70px;
 }
+
 .input1{
     width:400px;
 }
+
+.container{
+    border: 2px solid rgb(22, 56, 170);
+    width: 40%;
+    padding: 10px;
+    box-shadow: 4px 4px black;
+    border-radius: 5px;
+    background-color: rgba($color: #2e1cd5, $alpha: 0.5),
+}
+

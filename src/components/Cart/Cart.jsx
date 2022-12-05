@@ -5,7 +5,7 @@ import "./Cart.scss";
 import { Card, Button } from "antd";
 
 const Cart = () => {
-  const { cart, clearCart, createOrder } = useContext(ProductContext);
+  const { cart, clearCart, createOrder, product } = useContext(ProductContext);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -21,7 +21,9 @@ const Cart = () => {
 
   const cartItem = cart.map((cartItem, i) => {
     return (
+      <div className="card-container">
       <div className="productcardspace">
+      
         <Card
           className="cardproduct"
           title={cartItem.name}
@@ -31,11 +33,13 @@ const Cart = () => {
             border: "2px solid black",
           }}
         >
+          <div className="product-img"><img className="card-img" src={'http://localhost:3001/' + cartItem.img_product} alt='Product' /></div>
           <p> {cartItem.price.toFixed(2)} €</p>
           <br />
           <p> {cartItem.description} €</p>
         
         </Card>
+      </div>
       </div>
     );
   });

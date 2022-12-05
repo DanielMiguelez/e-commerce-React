@@ -1,15 +1,20 @@
 import "./Register.scss";
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import { UserContext } from "../../context/UserContext/UserState";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { register } = useContext(UserContext);
   const navigate = useNavigate()
+  const [repetedEmail, setRepetedEmail] = useState(false)
   const onFinish = (values) => {
-    register(values);
-    navigate("/products")
+  const error =  register(values);
+   if (error === ""){
+     navigate("/products")
+   }else{
+    setRepetedEmail(true)
+   }
   };
  
   /*useEffect(() => {
@@ -28,6 +33,7 @@ const Register = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
+        <h4>Register yourself!</h4>
         <Form.Item 
           label="Name"
           name="name"
@@ -35,9 +41,11 @@ const Register = () => {
             required: true,
             type: "text",
             message: "Please input your name!" 
-          }]}
+          },
+          {min:3}
+        ]}
         >
-          <Input />
+          <Input  placeholder="Input your name"/>
         </Form.Item>
 
         <Form.Item
@@ -45,11 +53,19 @@ const Register = () => {
           name="email"
           rules={[{ 
             required: true,
-            type: "email",
-            message: "Please input your email!" 
-          }]}
+            type: "email"
+          },
+          ({_}) => ({
+            validator(_) {
+              if (!repetedEmail){
+                return Promise.resolve("")
+              }
+              return Promise.reject ("email already in use");
+            }
+          }),
+        ]}
         >
-          <Input />
+          <Input  placeholder="Input your email"/>
         </Form.Item>
 
         <Form.Item
@@ -58,27 +74,57 @@ const Register = () => {
           rules={[{ 
             required: true,
             type: "password",
-            message: "Please input your password!" 
-          }]}
+            message: "Please input your password!" , 
+           
+          }, {min:6}
+        
+        ]}
+        hasFeedback
         >
-          <Input.Password />
+          <Input.Password  placeholder="Input your password" />
         </Form.Item>
 
         <Form.Item
           label="Password2"
           name="Password2"
-          rules={[{ 
-            required: true,
-            type: "password",
-            message: "Please repeat the password!" 
-          }]}
+          rules={[
+            {
+              required:true,
+            },
+              ({getFieldValue}) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue ("password") === value){
+                    return Promise.resolve("")
+                  }
+                  return Promise.reject ("passwords do not match");
+                }
+              }),
+          ]}
+        hasFeedback
         >
-          <Input.Password />
+
+          <Input.Password  placeholder="Repeat the password"/>
         </Form.Item>
+
+        <Form.Item
+          name="agreement"
+          wrapperCol={{span:24}}
+          valuePropName="checked"
+          rules={[
+              {required : true,
+               message: "Accept our terms please"},
+          ]}
+       >
+          <Checkbox>
+            {""}
+            Agree to our <a href="#"> Terms and conditions to register</a>
+          </Checkbox>
+
+       </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Register
           </Button>
         </Form.Item>
       </Form>

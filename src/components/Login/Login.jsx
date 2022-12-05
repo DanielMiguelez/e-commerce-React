@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(UserContext);
-  // eslint-disable-next-line
   const navigate = useNavigate();
   const onFinish = (values) => {
     login(values);
@@ -19,11 +18,13 @@ const Login = () => {
       if (foundToken) {
         navigate("/profile");
       }
-      
   }, [login]);
 
   return (
+    
     <div className="container">
+      
+      <h4>Log in here</h4>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -37,17 +38,21 @@ const Login = () => {
           name="email"
           rules={[{ required: true,
             type:"email",
-            message: "Please input your email!" }]}
+            message: "Please input your email!" },
+          ]}
+          hasFeedback
         >
-          <Input />
+          <Input placeholder="type your email" />
         </Form.Item>
 
         <Form.Item className="input1"
           label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[{ required: true, message: "Please input your password!" },
+          {whitespace:true}]}
+          hasFeedback
         >
-          <Input.Password />
+          <Input.Password placeholder="type your password" />
         </Form.Item>
 
         <Form.Item className="input1" wrapperCol={{ offset: 8, span: 16 }}>

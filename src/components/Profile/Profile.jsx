@@ -26,6 +26,9 @@ const Profile = () => {
   return (
     
     <div className="site-card-border-less-wrapper">
+      <br />
+        <h4>Logged User</h4>
+        <br />
 <Card className="cardprofile"
       title=  {user.name}
       bordered={true}
@@ -34,6 +37,7 @@ const Profile = () => {
         border: "2px solid green",
       }}
     >
+      
       <p><MailOutlined/> {user.email}</p>
       <br />
       <p> <UserOutlined /> {user.role}</p>
