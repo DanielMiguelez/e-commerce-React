@@ -6,6 +6,11 @@
     padding: 0 10px;
     cursor: pointer;
 
+    &:hover{
+        scale: scale(1.5);
+    }
+
+   
     .product-img {
         display: flex;
         justify-content: center;
@@ -33,4 +38,5 @@
         padding: 0 10px;
         border-radius: 5px 5px 5px 5px;
     }
+
 }
