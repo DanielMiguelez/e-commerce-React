@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 import './Header.scss'
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
-
+import {  Badge } from 'antd';
 import {HomeOutlined, ShopOutlined, UserAddOutlined, UserOutlined, ShoppingCartOutlined} from "@ant-design/icons"
+import { ProductContext } from '../../context/ProductContext/ProductState';
 const Header = () => {
   const { token } = useContext(UserContext);
+  const { cart } = useContext(ProductContext);
   return (
     <header>
       <nav>
             <Link to="/"><span className='link-header'> Home <HomeOutlined /> </span></Link>
             <Link to="/products"><span className='link-header'> Products <ShopOutlined /> </span></Link>
-            <Link to="/cart"><span className='link-header'>Cart<ShoppingCartOutlined /></span></Link>
+            <Link to="/cart"> <span className='link-header'><Badge count={cart.length} size = "small"></Badge>Cart<ShoppingCartOutlined /></span></Link>
           <div className='d-flex'>
             {
                 token 

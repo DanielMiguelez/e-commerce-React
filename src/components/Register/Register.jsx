@@ -33,6 +33,7 @@ const Register = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
+        <h4>Register yourself!</h4>
         <Form.Item 
           label="Name"
           name="name"
