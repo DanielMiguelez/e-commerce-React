@@ -18,7 +18,7 @@ const Header = () => {
           <div className='d-flex'>
             {
                 token 
-                ?  <Link to="/profile">Profile <UserOutlined /></Link>
+                ?  <Link to="/profile"> <span className='link-header'><UserOutlined />Profile</span> </Link>
 
                 : <><Link to="/register"><button className="d-flex align-items-center">Register <UserAddOutlined className='pl-2' /></button></Link>
                 <Link to="/login"><button className="d-flex align-items-center">Login <UserOutlined className='pl-2' /></button></Link> </>

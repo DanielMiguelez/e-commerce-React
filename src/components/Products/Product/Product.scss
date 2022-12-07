@@ -6,10 +6,6 @@
     padding: 0 10px;
     cursor: pointer;
 
-    &:hover{
-        scale: scale(1.5);
-    }
-
    
     .product-img {
         display: flex;
@@ -38,5 +34,16 @@
         padding: 0 10px;
         border-radius: 5px 5px 5px 5px;
     }
+    
 
+}
+.ant-card{
+    &:hover{
+        background-color: rgba($color: #322aa1, $alpha: 0.7);
+        img{
+            opacity: .5;
+        }
+        cursor: pointer;
+    }
+    
 }

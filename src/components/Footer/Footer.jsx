@@ -4,7 +4,6 @@ import './Footer.scss'
 const Footer = () => {
   return (
   <footer>
-    <br />
     <div className='divfooter2'>Developed by Alex and Daniel || All rights reserved </div>
   </footer>
   )

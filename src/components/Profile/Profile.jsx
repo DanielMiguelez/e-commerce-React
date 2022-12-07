@@ -37,11 +37,11 @@ const Profile = () => {
         border: "2px solid green",
       }}
     >
-      
       <p><MailOutlined/> {user.email}</p>
       <br />
       <p> <UserOutlined /> {user.role}</p>
     </Card>
+    <br />
       <Button onClick={logoutUser}>Logout</Button>
     </div>
   );
