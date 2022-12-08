@@ -78,3 +78,34 @@ $indent: 15px;
         }
     }
 }
+
+.rating-filter {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+
+    .rating-filter-header {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 25px 0 10px 0;
+    }
+
+    .container-rating-filter {
+        margin-left: $indent;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        div {
+            cursor: pointer;
+            padding: 5px;
+
+            &.filter-selected {
+                background-color: #923bff;
+                color: whitesmoke;
+                border-radius: 5px;
+                pointer-events: none;
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../../../context/ProductContext/ProductState";
+import { printReviewsStar } from '../../../utils/rating';
 import './SidebarFilters.scss'
 
 const SidebarFilters = (props) => {
@@ -101,6 +102,16 @@ const SidebarFilters = (props) => {
                 <option value="DESC">Higher to lower</option>
             </select>
           </div>
+        </div>
+      </div>
+      <div className="rating-filter">
+        <span className="rating-filter-header">Rating</span>
+        <div className="container-rating-filter">
+          {[6,5,4,3,2,1].map(number => (
+            number === 6 
+              ? <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"}>No rating filters</div> 
+              : <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"}>{printReviewsStar(number)} <span>or more...</span></div>
+          ))}
         </div>
       </div>
     </>

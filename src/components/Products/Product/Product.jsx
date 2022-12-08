@@ -1,58 +1,58 @@
-import React, { useContext } from 'react'
-import { ProductContext } from '../../../context/ProductContext/ProductState.js';
-import './Product.scss'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { ProductContext } from "../../../context/ProductContext/ProductState.js";
+import "./Product.scss";
+import { useNavigate } from "react-router-dom";
+import { getAverageRating, printReviewsStar } from "../../../utils/rating.js";
+
+const Product = (props) => {
+    const { products } = useContext(ProductContext);
+    const navigate = useNavigate();
+    const rating_filter = props.rating_filter;
+
+    const goProductOverview = (id) => {
+        navigate(`/product-overview/${id}`);
+    };
+
+    const productCards = products
+        .filter(product => {
+            if(rating_filter !== 6) {
+                if(product.Reviews.length > 0)
+                    return (getAverageRating(product) >= rating_filter)
+                else
+                    return false;
+            } else {
+                return true;
+            }
+        })
+        .map((product) => {
+            return (
+                <div
+                    className="product-card"
+                    onClick={() => goProductOverview(product.id)}
+                    key={product.id}
+                >
+                    <div className="product-img">
+                        <img
+                            className="card-img"
+                            src={"http://localhost:3001/" + product.img_product}
+                            alt="Product"
+                        />
+                    </div>
+                    <div className="product-name">{product.name}</div>
+                    {product.Reviews.length ? (
+                        <div>
+                            {printReviewsStar(getAverageRating(product))}
+                            <span>({product.Reviews.length})</span>
+                        </div>
+                    ) : null}
+                    <div className="product-price">{product.price}$</div>
+                </div>
+            );
+        });
 
 
-const Product = () => {
-  const { products } = useContext(ProductContext);
-  const navigate = useNavigate();
 
-  const getInfoRating = (product) => {
-    const number_reviews = product.Reviews.length;
-    const sum_rating = product.Reviews.map((review) => review.rating).reduce((a, b) => a + b);
-    const average_rating = sum_rating/number_reviews;
-  
-    return [Math.round(average_rating), number_reviews]
-  }
+    return <>{productCards}</>;
+};
 
-  const getReviewsStar = (product) => {
-    if(product.Reviews.length > 0) {
-      const info_rating = getInfoRating(product);
-   
-      return (
-        <div>
-          { [1, 2, 3, 4, 5].map(( number, idx) => number <= info_rating[0] ? <span key={idx} className="fa fa-star checked"></span> : <span key={idx} className="fa fa-star"></span>)}
-          <span>({info_rating[1]})</span>
-        </div>
-      );
-
-    } else {
-      return null;
-    }
-  }
-
-  const goProductOverview = (id) => {
-    navigate(`/product-overview/${id}`)
-  }
-
-  
-
-  const productCards = products.map(product => {
-    return (
-      <div className='product-card' onClick={() => goProductOverview(product.id)} key={product.id}>
-        <div className="product-img"><img className="card-img" src={'http://localhost:3001/' + product.img_product} alt='Product' /></div>
-        <div className="product-name">{product.name}</div>
-        { getReviewsStar(product) }
-        <div className="product-price">{product.price}$</div>
-      </div>
-    )
-  })
-  return (
-    <>
-     {productCards}
-    </>
-  )
-}
-
-export default Product
+export default Product;

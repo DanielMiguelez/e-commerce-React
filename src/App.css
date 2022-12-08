@@ -9,6 +9,10 @@ main{
     
 }
 
+.fa-star {
+    color: black;
+}
+
 .checked {
     color: orange;
 }

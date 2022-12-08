@@ -11,7 +11,8 @@ const Products = () => {
     minPrice: 1,
     maxPrice: 9999,
     orderPrice: '',
-    categoryActive: 0
+    categoryActive: 0,
+    rating_filter: 6
   });
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const Products = () => {
           </form>
 
           <div className="products-container">
-            <Product />
+            <Product rating_filter={filters.rating_filter} />
           </div>
         </div>
       </div>

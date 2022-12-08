@@ -5,6 +5,10 @@
     margin: 0.5%;
     padding: 0 10px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+
 
     &:hover{
         scale: scale(1.5);

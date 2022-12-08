@@ -4,44 +4,11 @@ import { ProductContext } from "../../context/ProductContext/ProductState";
 import { Image } from 'antd';
 import "./ProductOverview.scss";
 import ProductReviews from "./ProductReviews/ProductReviews";
+import { getAverageRating, printReviewsStar } from "../../utils/rating";
 
 const ProductOverview = () => {
     const { id } = useParams();
     const { getProduct, product, addCart } = useContext(ProductContext);
-
-    const getInfoRating = () => {
-        const number_reviews = product.Reviews.length;
-        const sum_rating = product.Reviews.map(
-            (review) => review.rating
-        ).reduce((a, b) => a + b);
-        const average_rating = sum_rating / number_reviews;
-
-        return [Math.round(average_rating), number_reviews];
-    };
-
-    const getReviewsStar = () => {
-        if (product.Reviews.length > 0) {
-            const info_rating = getInfoRating(product);
-
-            return (
-                <div>
-                    {[1, 2, 3, 4, 5].map((number, idx) =>
-                        number <= info_rating[0] ? (
-                            <span
-                                key={idx}
-                                className="fa fa-star checked"
-                            ></span>
-                        ) : (
-                            <span key={idx} className="fa fa-star"></span>
-                        )
-                    )}
-                    <span>({info_rating[1]})</span>
-                </div>
-            );
-        } else {
-            return null;
-        }
-    };
 
     useEffect(() => {
         getProduct(id);
@@ -68,7 +35,12 @@ const ProductOverview = () => {
                         <span className="name">
                             {product ? product.name : null}
                         </span>
-                        <div>{product ? getReviewsStar() : null}</div>
+                        {product && product.Reviews?.length ? (
+                            <div>
+                                { printReviewsStar(getAverageRating(product)) }
+                                <span>({product.Reviews.length})</span>
+                            </div>
+                        ) : null}
                         <span className="desc">
                             {product ? product.description : null}
                         </span>

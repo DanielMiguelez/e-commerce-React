@@ -2,6 +2,7 @@ import React, { useContext, useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ProductContext } from '../../../context/ProductContext/ProductState';
 import { UserContext } from '../../../context/UserContext/UserState';
+import { printReviewsStar } from '../../../utils/rating';
 import './ProductReviews.scss'
 
 const ProductReviews = (props) => {
@@ -37,16 +38,7 @@ const ProductReviews = (props) => {
                     <span className="author">{review.User.name}</span>
                     <div className="header-separator">-</div>
                     <div className="review-stars">
-                        {[1, 2, 3, 4, 5].map((number, idx) =>
-                            number <= review.rating ? (
-                                <span
-                                    key={idx}
-                                    className="fa fa-star checked"
-                                ></span>
-                            ) : (
-                                <span key={idx} className="fa fa-star"></span>
-                            )
-                        )}
+                        {printReviewsStar(review.rating)}
                     </div>
                 </div>
                 <div className='content'>
