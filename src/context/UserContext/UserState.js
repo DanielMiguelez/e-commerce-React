@@ -15,14 +15,20 @@ export const UserProvider = ({ children }) => {
   const API_URL = "http://localhost:3001";
 
   const login = async (user) => {
-    const res = await axios.post(API_URL + "/users/login", user);
-    dispatch({
-      type: "LOGIN",
-      payload: res.data,
-    });
+    try {
+      const res = await axios.post(API_URL + "/users/login", user);
+      dispatch({
+        type: "LOGIN",
+        payload: res.data,
+      });
 
-    if (res.data) {
-      localStorage.setItem("token", JSON.stringify(res.data.token));
+      if (res.data && res.data.ok) {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        return false;
+      }
+    } catch (error) {
+      console.error(error);
+      return true;
     }
   };
 
@@ -70,16 +76,17 @@ export const UserProvider = ({ children }) => {
   };
 
   const register = async (user) => {
-    const res = await axios.post(API_URL + "/users/createUser", user);
-    if (res.data.ok === false){
-      return(res.data.msg)
-    }else{
+    try {
+      const res = await axios.post(API_URL + "/users/createUser", user);
       dispatch({
         type: "REGISTER",
         payload: res.data,
-
       });
-        return("")
+      return false;
+    } catch (error) {
+      console.error(error)
+     /* return error.response.data.msg*/
+     return true
     }
   };
 
