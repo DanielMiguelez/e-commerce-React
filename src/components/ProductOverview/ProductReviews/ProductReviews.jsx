@@ -6,9 +6,11 @@ import { printReviewsStar } from "../../../utils/rating";
 import { Image } from "antd";
 import "./ProductReviews.scss";
 import FormReview from "./FormReview/FormReview";
+import { ReviewContext } from "../../../context/ReviewContext/ReviewState";
 
 const ProductReviews = () => {
-    const { product, deleteReview, getProduct } = useContext(ProductContext);
+    const { product, getProduct } = useContext(ProductContext);
+    const { deleteReview } = useContext(ReviewContext);
     const { token, user, getUserInfo } = useContext(UserContext);
     const [showForm, setShowForm] = useState(false);
     const navigate = useNavigate();
