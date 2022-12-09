@@ -22,7 +22,7 @@ const Products = () => {
   }, [filters]);
 
   return (
-    <div className='products-view mt-3 mb-5'>
+    <div className='products-view'>
       <div className='products-view-container'>
         <div className='sidebar-filters'>
           <SidebarFilters filters={filters} setFilters={setFilters} />
