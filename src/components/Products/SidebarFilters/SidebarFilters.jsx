@@ -12,6 +12,9 @@ const SidebarFilters = (props) => {
     const categoryClick = (e, id) => {
         setFilters( {...filters, categoryActive: id } );
     }
+    const reviewClick = (e, id) => {
+      setFilters( {...filters, rating_filter: id } );
+  }
 
     const eraseCurrency = (e) => {
         e.target.value = e.target.value.slice(0, -1);
@@ -108,7 +111,7 @@ const SidebarFilters = (props) => {
         <span className="rating-filter-header">Rating</span>
         <div className="container-rating-filter">
           {[6,5,4,3,2,1].map(number => (
-            <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"}>{number === 6 ? "No rating filters" : <>{printReviewsStar(number)} <span>or more...</span></>}</div> 
+            <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"} onClick={(e) => reviewClick(e, number)}>{number === 6 ? "No rating filters" : <>{printReviewsStar(number)}  <span>or more...</span></>} </div> 
           ))}
         </div>
       </div>

@@ -4,16 +4,38 @@
     justify-content: center;
     align-items: center;
 }
-
+.menuProfile{
+    font-weight: bolder;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    border-left: 1px solid rgb(15, 15, 22);
+    border-right: 1px solid rgb(31, 31, 46);
+    cursor: pointer;
+}
+p:hover{
+    background-color: rgb(36, 101, 154);
+}
+.containerprofile{
+    display: flex;
+    justify-content: space-around;
+}
 .cardprofile{
-    background-color: rgb(169, 202, 202);
-    margin: 10px;
     padding: 15px;
+    margin: 10vh 90vh 0 0;
     text-align: center;
-    box-shadow: 4px 4px rgb(74, 64, 64);
+    background-color: bisque;
 
-    &:hover{
-        background-color: rgba($color: #3033a0, $alpha: 0.5);
-    }
+}
+.ant-layout{
+    margin-top: 10vh;
+    display: flex;
 
+    flex-wrap: nowrap;
+    max-height: 50%;
+}
+h4{
+    text-align: center;
 }
