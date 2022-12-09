@@ -21,9 +21,9 @@ const Register = () => {
   };
 
   return (
+    <div className="padreregister">
     <div className="container">
       <h4>Register yourself!</h4>
-      <br />
       <Form
         name="register"
         labelCol={{ span: 8 }}
@@ -125,6 +125,7 @@ const Register = () => {
           </Button>
         </Form.Item>
       </Form>
+    </div>
     </div>
   );
 };
