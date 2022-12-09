@@ -9,8 +9,8 @@ const SidebarFilters = (props) => {
     const filters = props.filters;
     const setFilters = props.setFilters;
 
-    const categoryClick = (e) => {
-        setFilters( {...filters, categoryActive: parseInt(e.target.id.replace("category", "") )} );
+    const categoryClick = (e, id) => {
+        setFilters( {...filters, categoryActive: id } );
     }
 
     const eraseCurrency = (e) => {
@@ -60,7 +60,7 @@ const SidebarFilters = (props) => {
     };
 
     const categoriesList = categories_filter.map((category) => (
-        category.id === filters.categoryActive ? <li className="category-selected" key={category.id} id={'category' + category.id} onClick={categoryClick}>{category.name}</li> : <li key={category.id} id={'category' + category.id} onClick={categoryClick}>{category.name}</li>
+        <li className={category.id === filters.categoryActive ? "category-selected" : ""} key={category.id} onClick={(e) => categoryClick(e, category.id)}>{category.name}</li>
     ));
 
   return (
@@ -108,9 +108,7 @@ const SidebarFilters = (props) => {
         <span className="rating-filter-header">Rating</span>
         <div className="container-rating-filter">
           {[6,5,4,3,2,1].map(number => (
-            number === 6 
-              ? <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"}>No rating filters</div> 
-              : <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"}>{printReviewsStar(number)} <span>or more...</span></div>
+            <div key={number} className={filters.rating_filter === number ? "filter filter-selected" : "filter"}>{number === 6 ? "No rating filters" : <>{printReviewsStar(number)} <span>or more...</span></>}</div> 
           ))}
         </div>
       </div>

@@ -22,7 +22,7 @@ const users = (state, action) => {
       case "REGISTER":
       return {
         ...state,
-        user: action.payload,
+        user: null,
         token: null,
       };
 

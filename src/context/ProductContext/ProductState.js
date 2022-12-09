@@ -75,7 +75,6 @@ export const ProductProvider = ({ children }) => {
       const res = await axios.get(
         `${url}/products/getProductById/id/${id}`
       );
-      console.log(res.data);
       dispatch({
         type: "GET_PRODUCT",
         payload: res.data,
@@ -111,7 +110,7 @@ export const ProductProvider = ({ children }) => {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
 
-      const res = await axios.post( 
+      await axios.post( 
         `${url}/reviews/createReview`,
         {content, rating, product_id},
         {
@@ -121,10 +120,25 @@ export const ProductProvider = ({ children }) => {
         }
       );
 
-      // dispatch({
-      //   type: "CREATE_REVIEW",
-      //   payload: res.data,
-      // });
+    } 
+    
+    catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteReview = async (review_id) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      console.log(token);
+      await axios.delete( 
+        `${url}/reviews/deleteReviewById/${review_id}`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
 
     } 
     
@@ -147,6 +161,7 @@ export const ProductProvider = ({ children }) => {
         clearCart,
         createOrder,
         createReview,
+        deleteReview,
         getProduct
       }}
     >

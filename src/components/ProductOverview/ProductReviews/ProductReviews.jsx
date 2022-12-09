@@ -1,93 +1,144 @@
-import React, { useContext, useState  } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { ProductContext } from '../../../context/ProductContext/ProductState';
-import { UserContext } from '../../../context/UserContext/UserState';
-import { printReviewsStar } from '../../../utils/rating';
-import './ProductReviews.scss'
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ProductContext } from "../../../context/ProductContext/ProductState";
+import { UserContext } from "../../../context/UserContext/UserState";
+import { printReviewsStar } from "../../../utils/rating";
+import { Image } from "antd";
+import "./ProductReviews.scss";
+import FormReview from "./FormReview/FormReview";
 
-const ProductReviews = (props) => {
-    const { product, createReview, getProduct } = useContext(ProductContext);
-    const { token } = useContext(UserContext);
-    const [ showForm, setShowForm ] = useState(false)
-    const [ data, setData ] = useState({
-        content: '',
-        rating: 1
-    })
+const ProductReviews = () => {
+    const { product, deleteReview, getProduct } = useContext(ProductContext);
+    const { token, user, getUserInfo } = useContext(UserContext);
+    const [showForm, setShowForm] = useState(false);
     const navigate = useNavigate();
 
-    const sendReview = async (e) => {
+    useEffect(() => {
+        if(token)
+            getUserInfo();
+        // eslint-disable-next-line
+    }, []);
+
+    const goDeleteReview = async (e, review_id) => {
         e.preventDefault();
-        await createReview( data.content, data.rating, product.id );
-        setData({content: '', rating: 1});
-        setShowForm(false);
+        console.log("entra");
+        console.log(review_id);
+        await deleteReview(review_id);
         getProduct(product.id);
-    }
+    };
 
     const showFormReview = () => {
-        if(token) {
+        if (token) {
             setShowForm(true);
         } else {
-            navigate('/login');
+            navigate("/login");
         }
-    }
+    };
 
-    const reviewsLIst = product.Reviews.map( (review, idx) => {
+    const userAlreadyReviewProduct = () => {
+        if(!user)
+            return false;
+        const authorIds = product.Reviews.map((review) => review.User.id);
+        return authorIds.includes(user.id);
+    };
+
+    const reviewsLIst = product.Reviews.map((review, idx) => {
         return (
-            <div key={idx} className='user-review'>
-                <div className="header d-flex">
-                    <span className="author">{review.User.name}</span>
-                    <div className="header-separator">-</div>
-                    <div className="review-stars">
-                        {printReviewsStar(review.rating)}
+            <div
+                key={idx}
+                className={
+                    user && user.id === review.User.id
+                        ? "review-wrapper order-1 mt-4"
+                        : "review-wrapper order-2"
+                }
+            >
+                {user && user.id === review.User.id ? (
+                    <div className="d-flex justify-content-center">
+                        <span className="your-review">Your review</span>
+                    </div>
+                ) : null}
+                <div className="user-review">
+                    <div className="user-icon-container">
+                        <img
+                            src={
+                                "http://localhost:3001/" + review.User.user_img
+                            }
+                            alt=""
+                        />
+                    </div>
+                    <div className="review-desc">
+                        <div className="header d-flex">
+                            <span className="author">{review.User.name}</span>
+                            <div className="header-separator">-</div>
+                            <div className="review-stars">
+                                {printReviewsStar(review.rating)}
+                            </div>
+                            <div>
+                                <span className="date">
+                                    {review.updatedAt.slice(8, 10) +
+                                        "/" +
+                                        review.updatedAt.slice(5, 7) +
+                                        "/" +
+                                        review.updatedAt.slice(0, 4)}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="content">{review.content}</div>
+                        {review.review_img ? (
+                            <div className="review_img">
+                                <Image
+                                    height={"100%"}
+                                    src={
+                                        "http://localhost:3001/" +
+                                        review.review_img
+                                    }
+                                    alt="Product"
+                                />
+                            </div>
+                        ) : null}
+                        {user && user.id === review.User.id ? (
+                            <div className="d-flex justify-content-center buttons-my-review">
+                                <button className="btn btn-success">
+                                    Edit my review
+                                </button>
+                                <button
+                                    onClick={(e) =>
+                                        goDeleteReview(e, review.id)
+                                    }
+                                    className="btn btn-danger"
+                                >
+                                    Delete my review
+                                </button>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
-                <div className='content'>
-                    { review.content }
-                </div>
             </div>
-        )
-    })
+        );
+    });
     return (
         <>
-            { 
-                showForm 
-                ?   <div>
-                        <form className="form-writeReview" onSubmit={sendReview}>
-                            <div>
-                                <div className="rating-review">
-                                    <b>Rating:</b>
-                                    <div id="review-stars">
-                                        {[1, 2, 3, 4, 5].map((number, idx) =>
-                                            number <= data.rating ? (
-                                                <span
-                                                    onClick={() => setData({...data, rating: number})}
-                                                    key={idx}
-                                                    role="button"
-                                                    className="fa fa-star checked"
-                                                ></span>
-                                            ) : (
-                                                <span onClick={() => setData({...data, rating: number})} role="button" key={idx} className="fa fa-star"></span>
-                                            )
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                            <textarea className="form-control textarea-review" rows="3" value={data.content} onChange={(e) => setData({...data, content: e.target.value})} placeholder="Write your review here..."></textarea>
-                            <div className="buttons-review">
-                                <button className="btn btn-secondary" onClick={() => setShowForm(false)}>Close</button>
-                                <button className="btn btn-primary">Send</button>
-                            </div>
-                        </form>
+            {!userAlreadyReviewProduct() ? (
+                showForm ? (
+                    <FormReview setShowForm={setShowForm} />
+                ) : (
+                    <div className="d-flex justify-content-center p-4">
+                        <button
+                            className="btn btn-primary"
+                            onClick={showFormReview}
+                        >
+                            Create your own review
+                        </button>
                     </div>
-                :   <div className='d-flex justify-content-center p-4'>
-                        <button className='btn btn-primary' onClick={showFormReview}>Create your own review</button>
-                    </div>
-                }
-            <div className='review-container'>
-                { reviewsLIst }
+                )
+            ) : (
+                null
+            )}
+            <div className="reviews-container d-flex flex-column align-items-center">
+                {reviewsLIst}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default ProductReviews
+export default ProductReviews;

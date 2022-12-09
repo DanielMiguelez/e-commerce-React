@@ -25,10 +25,10 @@ const Carousel1 = () => {
     getProducts(filters.search, filters.categoryActive, filters.minPrice, filters.maxPrice, filters.orderPrice);
     // eslint-disable-next-line
   }, [filters]);
-  const productImage = products.map((product) => (
+  const productImage = products.map((product, idx) => (
     
     <img
-      
+      key={idx}
       src={"http://localhost:3001/" + product.img_product}
       alt="Product"
     />
