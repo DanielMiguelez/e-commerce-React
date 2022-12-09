@@ -27,7 +27,8 @@ const Login = () => {
   }, [login]);
 
   return (
-    <div className="container">
+    <div className="padreregister">
+    <div className="containerlogin">
       <h4>Log in here</h4>
       <Form
         name="basic"
@@ -76,6 +77,7 @@ const Login = () => {
           </Button>
         </Form.Item>
       </Form>
+    </div>
     </div>
   );
 };

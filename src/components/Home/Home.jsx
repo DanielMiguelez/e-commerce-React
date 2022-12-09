@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.scss";
 import {TwitterOutlined, InstagramOutlined,WhatsAppOutlined, FacebookOutlined , YoutubeOutlined } from "@ant-design/icons"
 import Carousel1 from "./Carousel1";
+ 
 const Home = () => {
   return (
     <div className="home">
