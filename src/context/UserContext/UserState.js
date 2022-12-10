@@ -90,6 +90,44 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const addProductToFavourites = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/addFavouriteProduct", 
+      { product_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "ADD_FAVOURITES"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  const removeProductToFavourites = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/removeFavouriteProduct", 
+      { product_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "REMOVE_FAVOURITES"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -99,6 +137,8 @@ export const UserProvider = ({ children }) => {
         logout,
         getUserInfo,
         register,
+        addProductToFavourites,
+        removeProductToFavourites
       }}
     >
       {children}

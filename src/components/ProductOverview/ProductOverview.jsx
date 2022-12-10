@@ -1,14 +1,40 @@
 import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { Image } from 'antd';
+import { ShoppingCartOutlined } from "@ant-design/icons"
 import "./ProductOverview.scss";
 import ProductReviews from "./ProductReviews/ProductReviews";
 import { getAverageRating, printReviewsStar } from "../../utils/rating";
+import { UserContext } from "../../context/UserContext/UserState";
 
 const ProductOverview = () => {
     const { id } = useParams();
     const { getProduct, product, addCart } = useContext(ProductContext);
+    const { addProductToFavourites, removeProductToFavourites, user, getUserInfo } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const handleFavourites = async () => {
+        if(user) {
+            if(userAlreadyFavouriteProduct()) {
+                await removeProductToFavourites(product.id);
+                getUserInfo();
+            } else {
+                await addProductToFavourites(product.id);
+                getUserInfo();
+            }
+        }
+        else {
+            navigate('/login');
+        }
+    }
+
+    const userAlreadyFavouriteProduct = () => {
+        if(!user || !product)
+            return false;
+        const productFavouritesIds = user.FavouriteProductsList.map((productFavourite) => productFavourite.id);
+        return productFavouritesIds.includes(product.id);
+    };
 
     useEffect(() => {
         getProduct(id);
@@ -47,12 +73,21 @@ const ProductOverview = () => {
                         <span className="price">
                             {product ? product.price : null}$
                         </span>
-                        <button
-                            className="add-cart align-self-center btn btn-primary"
-                            onClick={() => addCart(product)}
-                        >
-                            Add Cart
-                        </button>
+                        <div className="align-self-center buttons-container">
+                            <button
+                                className="add-cart align-self-center btn btn-primary"
+                                onClick={() => addCart(product)}
+                            >
+                                Add to the cart <ShoppingCartOutlined />
+                            </button>
+
+                            <button
+                                className="add-cart align-self-center btn favourites"
+                                onClick={handleFavourites}
+                            >
+                                {userAlreadyFavouriteProduct() ? "Remove" : "Add"} <img src={require("../../assets/white_heart.png")} alt="Heart" />
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className="reviews mt-4 d-flex flex-column">

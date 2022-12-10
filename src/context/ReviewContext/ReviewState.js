@@ -36,10 +36,52 @@ export const ReviewProvider = ({ children }) => {
         }
     };
 
+    const updateReview = async (id, content, rating, product_id, review_img, src) => {
+        try {
+            const token = JSON.parse(localStorage.getItem("token"));
+
+            const formData = new FormData();
+            formData.append("content", content);
+            formData.append("rating", rating);
+            formData.append("product_id", product_id);
+            if (review_img) 
+                formData.append("review_img", review_img);
+            if (!review_img && !src)
+                formData.append("review_img", '');
+
+            await axios.put(`${url}/reviews/updateReviewById/${id}`, formData, {
+                headers: {
+                    authorization: token,
+                },
+            });
+
+            dispatch({
+                type: "UPDATE_REVIEW"
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const getReview = async (id) => {
+        try {
+            const res = await axios.get(`${url}/reviews/getReviewById/${id}`);
+
+            if(res.data.review) {
+                dispatch({
+                    type: "GET_REVIEW",
+                    payload: res.data.review
+                });
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const deleteReview = async (review_id) => {
         try {
             const token = JSON.parse(localStorage.getItem("token"));
-            console.log(token);
+            
             await axios.delete(`${url}/reviews/deleteReviewById/${review_id}`, {
                 headers: {
                     authorization: token,
@@ -59,7 +101,9 @@ export const ReviewProvider = ({ children }) => {
             value={{
                 review: state.review,
                 createReview,
+                getReview,
                 deleteReview,
+                updateReview
             }}
         >
             {children}

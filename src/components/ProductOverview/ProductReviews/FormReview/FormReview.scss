@@ -5,6 +5,13 @@
     flex-direction: column;
     gap: 10px;
 
+    .header-form {
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        font-size: 19px;
+    }
+
     .rating-review {
         display: flex;
         justify-content: flex-start;
@@ -18,10 +25,6 @@
 
     .upload-container {
         gap: 30px;
-
-        img {
-            height: 100px;
-        }
     }
 
     .buttons-review {

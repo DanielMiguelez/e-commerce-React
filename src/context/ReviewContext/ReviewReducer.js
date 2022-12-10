@@ -4,6 +4,16 @@ const reviews = (state, action) => {
             return {
                 ...state,
             };
+        case "GET_REVIEW":
+            return {
+                ...state,
+                review: action.payload,
+            };
+        case "UPDATE_REVIEW":
+            return {
+                ...state,
+                review: null,
+            };
         case "DELETE_REVIEW":
             return {
                 ...state,
