@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext/UserState";
 import "./Profile.scss";
@@ -9,6 +9,37 @@ import { UserOutlined, MailOutlined, ShopOutlined } from "@ant-design/icons";
 const Profile = () => {
   const { getUserInfo, user, logout } = useContext(UserContext);
   const navigate = useNavigate();
+  const [navState, setNavState] = useState(0);
+
+  const ordersList = user
+    ? user.Orders.map((order) => {
+        return (
+          <div className="order">
+            <div className="order-header">
+              {order.date.slice(8, 10) +
+                "/" +
+                order.date.slice(5, 7) +
+                "/" +
+                order.date.slice(0, 4)}
+            </div>
+            <div className="order-products bg-white">
+              {order.Products.map((product) => {
+                return (
+                  <div className="d-flex justify-content-around align-items-center">
+                    <span>{product.name}</span>
+                    <img
+                      src={"http://localhost:3001/" + product.img_product}
+                      alt=""
+                    />
+                    <span>{product.price}$</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })
+    : null;
 
   const logoutUser = () => {
     logout();
@@ -24,40 +55,57 @@ const Profile = () => {
     return <span>Cargando...</span>;
   }
   return (
-    <div className="padrecontainer">
-    <div className="containerprofile">
+    <div className="profile-container">
       <div className="menuProfile">
-        <p> <UserOutlined /> INFO</p>
+        <p>USER'S NAVBAR INFO</p>
+        <p onClick={() => setNavState(0)}>
+          <UserOutlined /> INFO
+        </p>
         <br />
-        <p> <ShopOutlined /> Orders</p>
+        <p onClick={() => setNavState(1)}>
+          <ShopOutlined /> Orders
+        </p>
         <br />
-        <p>My favorite Products</p>
+        <p onClick={() => setNavState(2)}>My favorite Products</p>
         <br />
         <Button onClick={logoutUser}>Logout</Button>
       </div>
+      <div className="contentProfile">
 
-      <div className="site-card-border-less-wrapper" />
+        { 
+          navState === 0 ? 
+          <div className="d-flex justify-content-center">
+            <Card
+              className="cardprofile"
+              title={user.name}
+              bordered={true}
+              style={{
+                width: 210,
+                border: "2px solid green",
+              }}
+            >
+              <p>
+                <MailOutlined /> {user.email}
+              </p>
+              <br />
+              <p>
+                <UserOutlined /> {user.role}
+              </p>
+            </Card>
+          </div>
+          : null
+        }
 
-      <Card
-        className="cardprofile"
-        title={user.name}
-        bordered={true}
-        style={{
-          width: 210,
-          border: "2px solid green",
-        }}
-      >
-        
-        <p>
-          <MailOutlined /> {user.email}
-        </p>
-        <br />
-        <p>
-          <UserOutlined /> {user.role}
-        </p>
-      </Card>
+        { 
+          navState === 1 ?
+          <div className="d-flex align-items-center flex-column orders-container">
+            {ordersList}
+          </div>
+          : null
+        }
+      </div>
+
     </div>
-    </div> 
   );
 };
 

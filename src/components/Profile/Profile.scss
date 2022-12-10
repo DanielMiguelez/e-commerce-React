@@ -4,38 +4,70 @@
     justify-content: center;
     align-items: center;
 }
-.menuProfile{
-    font-weight: bolder;
-    display: flex;
-    padding: 20px;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-    border-left: 1px solid rgb(15, 15, 22);
-    border-right: 1px solid rgb(31, 31, 46);
-    cursor: pointer;
-}
+
 p:hover{
-    background-color: rgb(36, 101, 154);
+    color: rgb(36, 101, 154);
 }
-.containerprofile{
-    display: flex;
-    justify-content: space-around;
-}
+
 .cardprofile{
-    padding: 15px;
-    margin: 10vh 90vh 0 0;
     text-align: center;
     background-color: bisque;
-
 }
+
 .ant-layout{
     margin-top: 10vh;
     display: flex;
-
     flex-wrap: nowrap;
-    max-height: 50%;
+    max-height: 40%;
 }
 h4{
     text-align: center;
+}
+
+.profile-container {
+    display: flex;
+
+    .menuProfile {
+        flex: 1;
+        font-weight: bolder;
+        display: flex;
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .contentProfile {
+        flex: 5;
+    }
+
+}
+
+.orders-container {
+    gap: 10px;
+
+    .order {
+        border: 1px solid black;
+        border-radius: 20px;
+        width: 70%;
+
+        .order-header {
+            background-color: aqua;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .order-products {
+            display: flex;
+            flex-direction: column;
+            border-radius: 0px 0px 20px 20px;
+            gap: 10px;
+
+            img {
+                width: 30%;
+            }
+        }
+    }
 }
