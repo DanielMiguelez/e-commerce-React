@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../../context/ProductContext/ProductState";
 import { UserContext } from "../../../context/UserContext/UserState";
 import { printReviewsStar } from "../../../utils/rating";
+import { LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { Image } from "antd";
 import "./ProductReviews.scss";
 import FormReview from "./FormReview/FormReview";
@@ -11,7 +12,7 @@ import { ReviewContext } from "../../../context/ReviewContext/ReviewState";
 const ProductReviews = () => {
     const { product, getProduct } = useContext(ProductContext);
     const { deleteReview, getReview } = useContext(ReviewContext);
-    const { token, user, getUserInfo } = useContext(UserContext);
+    const { token, user, getUserInfo, likeReview, removeLikeReview } = useContext(UserContext);
     const [ showForm, setShowForm ] = useState(false);
     const [ editForm, setEditForm ] = useState(false);
     const navigate = useNavigate();
@@ -43,6 +44,29 @@ const ProductReviews = () => {
         const authorIds = product.Reviews.map((review) => review.User.id);
         return authorIds.includes(user.id);
     };
+
+    const userInReviewLikes = (review) => {
+        if(!user)
+            return false;
+        const userIds = review.ReviewsLiked.map((user) => user.id);
+        console.log(userIds);
+        return userIds.includes(user.id);
+    };
+
+    const handleReviewLike = async (review) => {
+        if(user) {
+            if(userInReviewLikes(review)) {
+                console.log("entra 1");
+                await removeLikeReview(review.id);
+            } else {
+                console.log("entra 2");
+                await likeReview(review.id);
+            }
+            getProduct(product.id);
+        } else {
+            navigate("/login");
+        }
+    }
 
     const reviewsLIst = product.Reviews.map((review, idx) => {
         return (
@@ -98,6 +122,11 @@ const ProductReviews = () => {
                                 />
                             </div>
                         ) : null}
+                        <div className="d-flex feedback-buttons">
+                            <button onClick={() => handleReviewLike(review)} className="btn">{userInReviewLikes(review) ? <><span>Remove my like</span> <DislikeOutlined /></> : <><span>Useful opinion</span> <LikeOutlined /></>} <span>({review.ReviewsLiked.length})</span></button>
+                            <button className="btn">Reply <i className="fa fa-reply" aria-hidden="true"></i> </button>
+                            <button className="btn">Report <i className="fa fa-exclamation-triangle" aria-hidden="true"></i> </button>
+                        </div>
                         {user && user.id === review.User.id ? (
                             <div className="d-flex justify-content-center buttons-my-review">
                                 <button onClick={async (e) => {

@@ -109,7 +109,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const removeProductToFavourites = async (id) => {
+  const removeProductFromFavourites = async (id) => {
     const token = JSON.parse(localStorage.getItem("token"));
 
     try {
@@ -128,6 +128,45 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const likeReview = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/giveLikeReview", 
+      { review_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "LIKE_REVIEW"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  const removeLikeReview = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      const res = await axios.put(API_URL + "/users/removeLikeReview", 
+      { review_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      console.log(res);
+      dispatch({
+        type: "REMOVE_LIKE_REVIEW"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -138,7 +177,9 @@ export const UserProvider = ({ children }) => {
         getUserInfo,
         register,
         addProductToFavourites,
-        removeProductToFavourites
+        removeProductFromFavourites,
+        likeReview,
+        removeLikeReview
       }}
     >
       {children}

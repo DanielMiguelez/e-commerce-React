@@ -11,13 +11,13 @@ import { UserContext } from "../../context/UserContext/UserState";
 const ProductOverview = () => {
     const { id } = useParams();
     const { getProduct, product, addCart } = useContext(ProductContext);
-    const { addProductToFavourites, removeProductToFavourites, user, getUserInfo } = useContext(UserContext);
+    const { addProductToFavourites, removeProductFromFavourites, user, getUserInfo } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleFavourites = async () => {
         if(user) {
             if(userAlreadyFavouriteProduct()) {
-                await removeProductToFavourites(product.id);
+                await removeProductFromFavourites(product.id);
                 getUserInfo();
             } else {
                 await addProductToFavourites(product.id);

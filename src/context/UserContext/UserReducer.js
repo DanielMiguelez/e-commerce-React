@@ -33,6 +33,14 @@ const users = (state, action) => {
         return {
           ...state
         };
+    case "LIKE_REVIEW":
+        return {
+          ...state
+        };
+    case "REMOVE_LIKE_REVIEW":
+        return {
+          ...state
+        };
 
     default:
       return state;
