@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "../../../context/ProductContext/ProductState.js";
 import "./Product.scss";
 import { useNavigate } from "react-router-dom";
+import { Empty } from 'antd';
 import { getAverageRating, printReviewsStar } from "../../../utils/rating.js";
 
 const Product = (props) => {
@@ -52,7 +53,19 @@ const Product = (props) => {
 
 
 
-    return <>{productCards}</>;
+    return (
+        <>
+            {   
+                productCards.length ? 
+                productCards 
+                :   
+                    <div className="d-flex flex-column align-items-center no-products">
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+                        <span>There are no products for those filters...</span>
+                    </div>
+            }
+        </>
+    );
 };
 
 export default Product;

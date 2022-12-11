@@ -2,9 +2,13 @@ import { useContext, useEffect } from "react";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { Empty } from 'antd';
 import "./Cart.scss";
+import { UserContext } from "../../context/UserContext/UserState";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cart, clearCart, createOrder, addOneCart, removeOneCart, removeCartProduct } = useContext(ProductContext);
+  const { token } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -23,8 +27,19 @@ const Cart = () => {
     );
   }
   const createNewOrder = async () => {
-    await createOrder(cart);
-    clearCart();
+    if(token) {
+      await createOrder(cart);
+      clearCart();
+    } else {
+      navigate(
+        "/login",
+        {
+            state: {
+                nextUrl: `cart`
+            }
+        }
+    );
+    }
   };
 
   const cartItem = cart.map((cartItem, i) => {

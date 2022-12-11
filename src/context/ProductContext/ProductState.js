@@ -145,6 +145,28 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const deleteProduct = async (product) => {
+        const token = JSON.parse(localStorage.getItem("token"));
+
+        try {
+            await axios.delete(
+                `${url}/products/deleteProductById/id/${product.id}`,
+                {
+                    headers: {
+                      authorization: token,
+                    }
+                }
+            );
+        } catch (error) {
+            console.error(error);
+        }
+
+        dispatch( {
+            type: "DELETE_PRODUCT",
+            payload: product,
+        })
+    };
+
     return (
         <ProductContext.Provider
             value={{
@@ -160,7 +182,8 @@ export const ProductProvider = ({ children }) => {
                 clearCart,
                 createOrder,
                 getProduct,
-                removeCartProduct
+                removeCartProduct,
+                deleteProduct
             }}
         >
             {children}

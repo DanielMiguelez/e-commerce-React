@@ -23,6 +23,11 @@ const products = (state, action) => {
                 product: action.payload,
                 loading: false,
             };
+        case "DELETE_PRODUCT":
+            return {
+                ...state,
+                products: state.products.filter(product => product.id !== action.payload.id),
+            };
         case "ADD_ONE_CART":
             return {
                 ...state,

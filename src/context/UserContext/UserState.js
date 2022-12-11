@@ -151,7 +151,7 @@ export const UserProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("token"));
 
     try {
-      const res = await axios.put(API_URL + "/users/removeLikeReview", 
+      await axios.put(API_URL + "/users/removeLikeReview", 
       { review_id: id}, 
       {
         headers: {
