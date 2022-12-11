@@ -16,6 +16,9 @@ import { OrdersProvider } from "./context/OrderContext/OrderState";
 import { ReviewProvider } from "./context/ReviewContext/ReviewState";
 import ProductOverview from "./components/ProductOverview/ProductOverview";
 import Admin from "./components/Admin/Admin";
+import AuthRoutes from "./utils/AuthRoutes";
+import AdminRoutes from "./utils/AdminRoutes";
+
 
 function App() {
   return (
@@ -31,11 +34,15 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/profile" element={<Profile />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/product-overview/:id" element={<ProductOverview />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/admin" element={<Admin />} />
+                    <Route element={<AuthRoutes />}>
+                      <Route path="/profile" element={<Profile />} />
+                      <Route element={<AdminRoutes />}>
+                        <Route path="/admin" element={<Admin />} />
+                      </Route>
+                    </Route>
                     <Route path="*" element={<Navigate to="/" />}  />
                   </Routes>
                 </main>

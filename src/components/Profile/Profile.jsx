@@ -19,9 +19,9 @@ const Profile = () => {
   const [navState, setNavState] = useState(0);
 
   const ordersList = user
-    ? user.Orders.map((order) => {
+    ? user.Orders.map((order, i) => {
         return (
-          <div className="order">
+          <div key={i} className="order">
             <div className="order-header">
               {order.date.slice(8, 10) +
                 "/" +
@@ -30,9 +30,9 @@ const Profile = () => {
                 order.date.slice(0, 4)}
             </div>
             <div className="order-products bg-white">
-              {order.Products.map((product) => {
+              {order.Products.map((product, i) => {
                 return (
-                  <div className="d-flex justify-content-around align-items-center">
+                  <div key={i} className="d-flex justify-content-around align-items-center">
                     <span>{product.name}</span>
                     <img
                       src={"http://localhost:3001/" + product.img_product}
@@ -59,7 +59,7 @@ const Profile = () => {
   }, []);
 
   if (!user) {
-    return <span>Cargando...</span>;
+    return <span>Loading...</span>;
   }
   return (
     <div className="profile-container">

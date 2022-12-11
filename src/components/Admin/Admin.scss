@@ -1,8 +1,23 @@
+.admin-container {
+    gap: 30px;
+
+    .admin-header {
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .admin-form {
+        width: 80%;
+    }
+}
+
 table {
     width: 80%;
+    border: 1px solid black;
 
     img {
         width: 100%;
+        padding: 20px 0;
     }
 
     thead {
@@ -11,7 +26,6 @@ table {
     }
 
     td, th {
-        border: 1px solid black;
         width: 10%;
         padding: 0 20px;
         text-align: center;
