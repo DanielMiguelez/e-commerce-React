@@ -22,6 +22,19 @@ header{
         &:hover{
             color: yellowgreen;
         }
+
+        .ant-badge {
+            color: white;
+            font-size: 18px;
+        }
+
+        span {
+            color: white;
+
+            &:hover{
+                color: yellowgreen;
+            }
+        }
     }
     button{
         margin: 1vh;

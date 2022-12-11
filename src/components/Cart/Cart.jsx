@@ -1,52 +1,70 @@
 import { useContext, useEffect } from "react";
-import { OrderContext } from "../../context/OrderContext/OrderState";
 import { ProductContext } from "../../context/ProductContext/ProductState";
+import { Empty } from 'antd';
 import "./Cart.scss";
-import { Card, Button } from "antd";
 
 const Cart = () => {
-  const { cart, clearCart, createOrder, product } = useContext(ProductContext);
+  const { cart, clearCart, createOrder, addOneCart, removeOneCart, removeCartProduct } = useContext(ProductContext);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   if (cart.length <= 0) {
-    return <span>No tienes ningún producto añadido</span>;
+    return (
+      <>
+        <div className="d-flex justify-content-center"><span className="my-cart-header">My cart</span></div>
+        <div className="empty-container">
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} imageStyle={{height: 60,}}/>
+          <p className="d-flex justify-content-center">Looks like your cart is empty. Go to products and add some!</p>
+        </div>
+        <div className="d-flex justify-content-center"><button className="btn btn-primary">Go products</button></div>
+      </>
+    );
   }
-  const createNewOrder = () => {
-    createOrder(cart);
-    //clearCart();
+  const createNewOrder = async () => {
+    await createOrder(cart);
+    clearCart();
   };
 
   const cartItem = cart.map((cartItem, i) => {
     return (
-      <div className="card-container">
-      <div className="productcardspace">
       
-        <Card
-          className="cardproduct"
-          title={cartItem.name}
-          bordered={true}
-          style={{
-            width: 250,
-            border: "2px solid black",
-          }}
-        >
-          <div className="product-img"><img className="card-img" src={'http://localhost:3001/' + cartItem.img_product} alt='Product' /></div>
-          <p> {cartItem.price.toFixed(2)} €</p>
-          <br />
-          <p> {cartItem.description} €</p>
-        
-        </Card>
-      </div>
-      </div>
+        <div key={i} className="card-product">
+          <div className="d-flex align-items-center delete">
+            <button onClick={() => removeCartProduct(cartItem.product)} className="btn btn-danger"><i className="fa fa-trash"></i></button>
+          </div>
+          <div className="image-container"><img src={"http://localhost:3001/" + cartItem.product.img_product} alt="Cart Item Product"/></div>
+          <div className="d-flex flex-column justify-content-center info">
+            <span className="important-info">{cartItem.product.name}</span>
+            <span className="important-info">{(cartItem.product.price * cartItem.amount).toFixed(2)}$</span>
+            { cartItem.amount > 1 ? <span>{cartItem.amount + " units / " + cartItem.product.price + "$ each one" }</span> : null}
+          </div>
+          <div className="d-flex align-items-center amount">
+            <div className="d-flex justify-content-center amount-form">
+              <button onClick={() => removeOneCart(cartItem.product)}>-</button>
+              <input type="text" value={cartItem.amount} readOnly />
+              <button onClick={() => addOneCart(cartItem.product)}>+</button>
+            </div>
+          </div>
+        </div>
+
     );
   });
+
   return (
-    <div>
-      {cartItem} <Button onClick={() => clearCart()}>Clear cart</Button>
-      <Button onClick={() => createNewOrder()}> Create Order</Button>
+    <div className="d-flex flex-column align-items-center">
+      <div className="d-flex justify-content-center"><span className="my-cart-header">My cart</span></div>
+      <div className="card-container mt-3">
+        {cartItem} 
+      </div>
+      <div className="d-flex align-items-center mt-4 buttons-cart">
+        <div className="d-flex align-items-center justify-content-around">
+          <button className="btn clear" onClick={() => clearCart()}>Clear cart</button>
+          <span><b>Total price:</b> { (cart.map(item => item.amount*item.product.price).reduce((a,b) => a+b)).toFixed(2) }$</span>
+          <button className="btn" onClick={() => createNewOrder()}>Buy</button>
+        </div>
+      </div>
     </div>
   );
 };

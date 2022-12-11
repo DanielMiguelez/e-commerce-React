@@ -14,7 +14,7 @@ const Header = () => {
       <nav>
             <Link to="/"><span className='link-header'> Home <HomeOutlined /> </span></Link>
             <Link to="/products"><span className='link-header'> Products <ShopOutlined /> </span></Link>
-            <Link to="/cart"> <span className='link-header'><Badge count={cart.length} size = "small"></Badge>Cart<ShoppingCartOutlined /></span></Link>
+            <Link to="/cart"> <span className='link-header'>Cart <Badge count={cart.length ? cart.map(item => item.amount).reduce((a,b) => a+b) : 0} size = "small"><ShoppingCartOutlined /></Badge> </span></Link>
           <div className='d-flex'>
             {
                 token 

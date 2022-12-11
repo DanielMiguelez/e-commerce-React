@@ -54,10 +54,48 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
-    const addCart = (product) => {
+    const addOneCart = (product) => {
+        let found = false;
+        state.cart.forEach(item => {
+            if(product.id === item.product.id) {
+                item.amount++;
+                found = true;
+            }
+        });
+        if(!found) {
+            state.cart.push({product, amount: 1});
+        }
         dispatch({
-            type: "ADD_CART",
-            payload: product,
+            type: "ADD_ONE_CART",
+            payload: state.cart,
+        });
+    };
+
+    const removeOneCart = (product) => {
+        for (let i = 0; i < state.cart.length; i++) {
+            if(state.cart[i].product.id === product.id) {
+                state.cart[i].amount--;
+                if(state.cart[i].amount === 0)
+                    state.cart.splice(i, 1);
+                break;
+            }
+        }
+        dispatch({
+            type: "REMOVE_ONE_CART",
+            payload: state.cart,
+        });
+    };
+
+    const removeCartProduct = (product) => {
+        for (let i = 0; i < state.cart.length; i++) {
+            if(state.cart[i].product.id === product.id) {
+              state.cart.splice(i, 1);
+              break;
+            }
+        }
+        dispatch({
+            type: "REMOVE_CART_PRODUCT",
+            payload: state.cart,
         });
     };
 
@@ -84,20 +122,24 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
-    const createOrder = async (order) => {
+    const createOrder = async (cart) => {
         try {
             const token = JSON.parse(localStorage.getItem("token"));
-            console.log(order);
-            const res = await axios.post(
+
+            const products = []
+            for (const item of cart) {
+                products.push({id: item.product.id, amount: item.amount})
+            }
+
+            await axios.post(
                 `${url}/orders/createOrder`,
-                { products: order },
+                { products: products },
                 {
                     headers: {
                         authorization: token,
                     },
                 }
             );
-            console.log(res);
         } catch (error) {
             console.error(error);
         }
@@ -113,10 +155,12 @@ export const ProductProvider = ({ children }) => {
                 cart: state.cart,
                 getCategories,
                 getProducts,
-                addCart,
+                addOneCart,
+                removeOneCart,
                 clearCart,
                 createOrder,
                 getProduct,
+                removeCartProduct
             }}
         >
             {children}

@@ -23,10 +23,20 @@ const products = (state, action) => {
                 product: action.payload,
                 loading: false,
             };
-        case "ADD_CART":
+        case "ADD_ONE_CART":
             return {
                 ...state,
-                cart: [action.payload, ...state.cart],
+                cart: action.payload,
+            };
+        case "REMOVE_ONE_CART":
+            return {
+                ...state,
+                cart: action.payload,
+            };
+        case "REMOVE_CART_PRODUCT":
+            return {
+                ...state,
+                cart: action.payload,
             };
         case "CLEAR_CART":
             return {

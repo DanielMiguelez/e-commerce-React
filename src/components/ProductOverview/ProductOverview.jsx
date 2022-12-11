@@ -10,7 +10,7 @@ import { UserContext } from "../../context/UserContext/UserState";
 
 const ProductOverview = () => {
     const { id } = useParams();
-    const { getProduct, product, addCart } = useContext(ProductContext);
+    const { getProduct, product, addOneCart } = useContext(ProductContext);
     const { addProductToFavourites, removeProductFromFavourites, user, getUserInfo } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -25,7 +25,14 @@ const ProductOverview = () => {
             }
         }
         else {
-            navigate('/login');
+            navigate(
+                "/login",
+                {
+                    state: {
+                        nextUrl: `product-overview/${product.id}`
+                    }
+                }
+            );
         }
     }
 
@@ -76,7 +83,7 @@ const ProductOverview = () => {
                         <div className="align-self-center buttons-container">
                             <button
                                 className="add-cart align-self-center btn btn-primary"
-                                onClick={() => addCart(product)}
+                                onClick={() => addOneCart(product)}
                             >
                                 Add to the cart <ShoppingCartOutlined />
                             </button>

@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Login/Login";
@@ -34,6 +34,7 @@ function App() {
                     <Route path="/products" element={<Products />} />
                     <Route path="/product-overview/:id" element={<ProductOverview />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="*" element={<Navigate to="/" />}  />
                   </Routes>
                 </main>
                 <Footer />

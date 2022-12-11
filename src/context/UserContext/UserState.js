@@ -158,7 +158,6 @@ export const UserProvider = ({ children }) => {
           authorization: token,
         }
       });
-      console.log(res);
       dispatch({
         type: "REMOVE_LIKE_REVIEW"
       });

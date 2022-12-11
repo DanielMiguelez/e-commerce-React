@@ -1,14 +1,119 @@
 .card-container{
     display: flex;
-    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
 }
-.productcardspace{
-    width: 20%;
+
+.my-cart-header {
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 40px;
 }
-.cardproduct{
+
+.empty-container {
+
+    svg {
+        width: 60px;
+    }
+
+    p {
+        font-weight: 200;
+    }
+}
+
+.card-product {
     background-color: rgb(255, 255, 255);
-    margin: 10px;
     padding: 15px;
     text-align: center;
-    box-shadow: 4px 4px rgb(74, 64, 64);
+    border: 1px solid black;
+    width: 75%;
+
+    display: flex;
+    justify-content: space-around;
+
+    .image-container {
+        width: 20%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .info {
+        width: 40%;
+        gap: 15px;
+        align-items: flex-start;
+
+        span {
+            text-align: left;
+
+            &.important-info {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .amount {
+        width: 10%;
+
+        .amount-form {
+            input {
+                flex: 2;
+                font-weight: bold;
+                text-align: center;
+                width: 50%;
+            }
+
+            button {
+                flex: 1;
+                font-weight: bold;
+                border: 1px solid black;
+                border-radius: 0px;
+                width: 25%;
+
+                &:hover {
+                    background-color: rgb(212, 207, 207);
+                }
+            }
+        }
+    }
+
+    .delete {
+        width: 5%;
+        button {
+            width: 100%;
+            padding: 10px 10px;
+            font-size: 20px;
+
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+.buttons-cart {
+    gap: 10px;
+    width: 70%;
+
+    div {
+        gap: 10px;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    button {
+        border: 1px solid black;
+
+        &.clear {
+            align-self: flex-end;
+        }
+
+        &:hover {
+            border: 1px solid black;
+            background-color: rgb(152, 146, 146);
+            color: white;
+        }
+    }
 }

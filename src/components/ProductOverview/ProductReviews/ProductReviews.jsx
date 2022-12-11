@@ -34,7 +34,14 @@ const ProductReviews = () => {
             setEditForm(false);
             setShowForm(true);
         } else {
-            navigate("/login");
+            navigate(
+                "/login",
+                {
+                    state: {
+                        nextUrl: `product-overview/${product.id}`
+                    }
+                }
+            );
         }
     };
 
@@ -49,22 +56,26 @@ const ProductReviews = () => {
         if(!user)
             return false;
         const userIds = review.ReviewsLiked.map((user) => user.id);
-        console.log(userIds);
         return userIds.includes(user.id);
     };
 
     const handleReviewLike = async (review) => {
         if(user) {
             if(userInReviewLikes(review)) {
-                console.log("entra 1");
                 await removeLikeReview(review.id);
             } else {
-                console.log("entra 2");
                 await likeReview(review.id);
             }
             getProduct(product.id);
         } else {
-            navigate("/login");
+            navigate(
+                "/login",
+                {
+                    state: {
+                        nextUrl: `product-overview/${product.id}`
+                    }
+                }
+            );
         }
     }
 
