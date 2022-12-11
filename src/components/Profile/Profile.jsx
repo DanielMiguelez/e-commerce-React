@@ -4,7 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext/UserState";
 import "./Profile.scss";
 import { Card, Button } from "antd";
-import { UserOutlined, MailOutlined, ShopOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  MailOutlined,
+  ShopOutlined,
+  HomeOutlined,
+  PhoneOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 
 const Profile = () => {
   const { getUserInfo, user, logout } = useContext(UserContext);
@@ -57,7 +64,6 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="menuProfile">
-        <p>USER'S NAVBAR INFO</p>
         <p onClick={() => setNavState(0)}>
           <UserOutlined /> INFO
         </p>
@@ -66,45 +72,53 @@ const Profile = () => {
           <ShopOutlined /> Orders
         </p>
         <br />
-        <p onClick={() => setNavState(2)}>My favorite Products</p>
+        <p onClick={() => setNavState(2)}>
+          {" "}
+          <ShopOutlined /> My favorite Products
+        </p>
         <br />
         <Button onClick={logoutUser}>Logout</Button>
       </div>
       <div className="contentProfile">
-
-        { 
-          navState === 0 ? 
-          <div className="d-flex justify-content-center">
+        
+        <p className="loggeduser">  <SmileOutlined />YOUR INFO</p>
+        {navState === 0 ? (
+          <div className="d-flex flex-direction-column justify-content-center w-100 mb-4 ">
             <Card
-              className="cardprofile"
-              title={user.name}
+              className="cardprofile "
+              title={user.name} 
               bordered={true}
               style={{
-                width: 210,
-                border: "2px solid green",
+                width: 400,
+                height: 300,
               }}
             >
               <p>
+                <SmileOutlined /> Male
+              </p>
+              <p>
+              <UserOutlined /> Age: 26
+              </p>
+              <p>
+                <PhoneOutlined /> Phone Number: 612 - 654 - 986
+              </p>
+
+              <p>
                 <MailOutlined /> {user.email}
               </p>
-              <br />
               <p>
-                <UserOutlined /> {user.role}
+                <HomeOutlined /> Direccion: Calle Almudin, 1, Valencia
               </p>
             </Card>
           </div>
-          : null
-        }
+        ) : null}
 
-        { 
-          navState === 1 ?
+        {navState === 1 ? (
           <div className="d-flex align-items-center flex-column orders-container">
             {ordersList}
           </div>
-          : null
-        }
+        ) : null}
       </div>
-
     </div>
   );
 };

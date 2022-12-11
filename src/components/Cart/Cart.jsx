@@ -16,7 +16,7 @@ const Cart = () => {
   }
   const createNewOrder = () => {
     createOrder(cart);
-    //clearCart();
+    clearCart();
   };
 
   const cartItem = cart.map((cartItem, i) => {

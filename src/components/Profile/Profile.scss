@@ -1,9 +1,4 @@
-.site-card-border-less-wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 
 p:hover{
     color: rgb(36, 101, 154);
@@ -11,7 +6,16 @@ p:hover{
 
 .cardprofile{
     text-align: center;
-    background-color: bisque;
+    background-color: rgb(150, 208, 188);
+    border: 3px solid black;
+    
+svg{
+    margin-bottom: 7px;
+}
+
+p{
+    font-size: larger;
+}
 }
 
 .ant-layout{
@@ -31,21 +35,50 @@ h4{
         flex: 1;
         font-weight: bolder;
         display: flex;
-        padding: 20px;
+        padding: 60px;
         flex-direction: column;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 7%;
         cursor: pointer;
+        font-size: 20px;
+    p{
+        background-color: rgb(62, 147, 157);
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    svg{
+        margin-bottom: 7px;
+    }
+       
+    p:hover{
+        background-color: rgb(14, 190, 209);
+        border-radius: 5px;
+        padding: 10px;
+    }
+   
     }
 
     .contentProfile {
         flex: 5;
+        margin-top: 10%;
+    svg{
+        margin-bottom: 7px;
+    }
+        
+    }
+    .loggeduser{
+        margin-left: 45%;
+        font-size: larger ;
+        font-weight: 500;
     }
 
 }
 
 .orders-container {
     gap: 10px;
+    margin-bottom: 5px;
 
     .order {
         border: 1px solid black;
@@ -53,7 +86,7 @@ h4{
         width: 70%;
 
         .order-header {
-            background-color: aqua;
+            background-color: rgb(66, 106, 106);
             border-radius: 20px 20px 0 0;
             display: flex;
             justify-content: center;
