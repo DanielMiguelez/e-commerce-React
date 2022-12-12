@@ -4,7 +4,7 @@
 
 <p align="center">In this project, we have developed an e-commerce where users will register, log in, view products and create orders using the e-commerce API they created in the 1st Backend Project. </p>
 
-## Objectives
+## Goals of this project
 
 ### Development of an e-commerce using Front and Backend where we will put in practice how to:
 
@@ -100,11 +100,19 @@ This space is made to list my favourites E-COMMERCE projects that we have explor
 
 ## Project's review and GIFS
 
-Here we can see both Home andProducts components, and how do they work.
+Here we can see with our gifs, how we did it, and how do they work.
 
-![foto](src/assets/HomeAndProducts.gif)
+### Home preview GIF
 
-![foto](src/assets/Order.gif)
+![foto](src/assets/home1.gif)
+
+### View of products, and selecting different products.
+
+![foto](src/assets/products2.gif)
+
+### Choosing products, putting them into the cart, liking them, and making a purchase.
+
+![foto](src/assets/likesandorders3.gif)
 
 ## Contact 
 
@@ -114,12 +122,12 @@ Daniel Miguelez
     <a href="https://github.com/DanielMiguelez" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </p>
 <p align="center">
-Alex Giménez
+Alex Jiménez
 <a href = "mailto:alexjimenezada@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
     <a href="https://github.com/radikalex" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </p>
 ---
-Developed by [Alex Giménez](https://github.com/radikalex) and [Daniel Miguelez](https://github.com/DanielMiguelez)
+Developed by [Alex Jiménez](https://github.com/radikalex) and [Daniel Miguelez](https://github.com/DanielMiguelez)
 ---
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
