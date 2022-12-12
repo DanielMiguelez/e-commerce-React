@@ -26,6 +26,13 @@
                     text-transform: uppercase;
                 }
 
+                .price {
+                    color: orange;
+                    font-size: 30px;
+                    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.711);
+                    font-weight: bold;
+                }
+
                 .buttons-container {
                     display: flex;
                     justify-content: space-around;
@@ -53,19 +60,16 @@
                         }
                     }
                 }
-
             }
         }
 
         .reviews {
-
             .reviews-header {
                 font-size: 26px;
                 text-align: center;
                 padding: 20px 0;
                 border-top: 1px solid rgba(99, 96, 96, 0.337);
-                border-bottom: 1px solid  rgba(99, 96, 96, 0.337);
-                
+                border-bottom: 1px solid rgba(99, 96, 96, 0.337);
             }
         }
     }
