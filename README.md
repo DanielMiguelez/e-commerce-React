@@ -2,7 +2,7 @@
 
 <h3 align="center">MERN STACK FRONTEND PROJECT</h3>
 
-<p align="center">In this project, everything learned so far is unified. Students will develop an e-commerce where users will register, log in, view products and create orders using the e-commerce API they created in the 1st Backend Project. </p>
+<p align="center">In this project, we have developed an e-commerce where users will register, log in, view products and create orders using the e-commerce API they created in the 1st Backend Project. </p>
 
 ## Objectives
 
@@ -15,13 +15,12 @@
     <li>View products</a></li>
     <li>Create orders</a></li>
     <li>Add to cart</a></li>
-</ol>
+  </ol>
 </objectives>
 
 ### Views
 
 <views>
- 
   <ol>
     <li>Home</a></li>
     <li>Products</a></li>
@@ -41,15 +40,15 @@
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+In here you can appreciate an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
+### Prerequisites to start the project
 
 This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
-  npm install react sass
+  npm install
   ```
 
 ### Installation
@@ -60,19 +59,19 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    git clone https://github.com/radikalex/e-commerce-React
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
-   npm install react sass
+   npm install 
    ```
-4. Ready to start!
+3. Ready to start!
   ```sh
   npm start
 
 ## Future Roadmap
 
-- [ ] Add a different style
-- [ ] Add more products
-- [ ] Add reviews
+- [ ] Improve the styles with SASS
+- [ ] Add more products to the listing
+- [ ] Put in practice the remaining Extra exercises
 
   ```
 ## Contributing
@@ -97,7 +96,6 @@ This project is under license of Alex Giménez and Daniel Miguélez.
 This space is made to list my favourites E-COMMERCE projects that we have explored and inspired by while doing our app.
 
 * https://github.com/Molerog/FrontendOnlineShop
-* https://github.com/radikalex/e-commerce-React
 * https://github.com/SofiaPinilla/eCommerce-Zelda
 
 ## Project's review and GIFS
@@ -105,7 +103,8 @@ This space is made to list my favourites E-COMMERCE projects that we have explor
 Here we can see both Home andProducts components, and how do they work.
 
 ![foto](assets/HomeAndProducts.gif)
-![foto](assets/Order.gif).
+
+![foto](assets/Order.gif)
 
 ## Contact 
 
@@ -116,7 +115,7 @@ Daniel Miguelez
 </p>
 <p align="center">
 Alex Giménez
-<a href = "mailto:danielmiguelez1993@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href = "mailto:alexjimenezada@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
     <a href="https://github.com/radikalex" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </p>
 ---
