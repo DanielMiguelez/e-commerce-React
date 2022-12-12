@@ -5,46 +5,57 @@ import "./Products.scss";
 import SidebarFilters from "./SidebarFilters/SidebarFilters";
 
 const Products = () => {
-  const { getCategories, getProducts } = useContext(ProductContext);
-  const [ filters, setFilters ] = useState({
-    search: "",
-    minPrice: 1,
-    maxPrice: 9999,
-    orderPrice: '',
-    categoryActive: 0,
-    rating_filter: 6
-  });
+    const { getCategories, getProducts } = useContext(ProductContext);
+    const [filters, setFilters] = useState({
+        search: "",
+        minPrice: 1,
+        maxPrice: 9999,
+        orderPrice: "",
+        categoryActive: 0,
+        rating_filter: 6,
+    });
 
-  useEffect(() => {
-    getCategories();
-    getProducts(filters.search, filters.categoryActive, filters.minPrice, filters.maxPrice, filters.orderPrice);
-    // eslint-disable-next-line
-  }, [filters]);
+    useEffect(() => {
+        getCategories();
+        getProducts(
+            filters.search,
+            filters.categoryActive,
+            filters.minPrice,
+            filters.maxPrice,
+            filters.orderPrice
+        );
+        // eslint-disable-next-line
+    }, [filters]);
 
-  return (
-    <div className='products-view'>
-      <div className='products-view-container'>
-        <div className='sidebar-filters'>
-          <SidebarFilters filters={filters} setFilters={setFilters} />
+    return (
+        <div className="products-view">
+            <div className="products-view-container">
+                <div className="sidebar-filters">
+                    <SidebarFilters filters={filters} setFilters={setFilters} />
+                </div>
+                <div className="products">
+                    <form>
+                        <input
+                            type="text"
+                            className="form-control search"
+                            placeholder="Search a product..."
+                            value={filters.search}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    search: e.target.value,
+                                })
+                            }
+                        />
+                    </form>
+
+                    <div className="products-container">
+                        <Product rating_filter={filters.rating_filter} />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="products">
-          <form>
-            <input
-              type="text"
-              className="form-control search"
-              placeholder="Search a product..."
-              value={filters.search}
-              onChange={(e) => setFilters({...filters, search: e.target.value})}
-            />
-          </form>
-
-          <div className="products-container">
-            <Product rating_filter={filters.rating_filter} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Products;
