@@ -102,9 +102,9 @@ This space is made to list my favourites E-COMMERCE projects that we have explor
 
 Here we can see both Home andProducts components, and how do they work.
 
-![foto](assets/HomeAndProducts.gif)
+![foto](src/assets/HomeAndProducts.gif)
 
-![foto](assets/Order.gif)
+![foto](src/assets/Order.gif)
 
 ## Contact 
 
