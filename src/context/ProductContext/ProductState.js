@@ -122,6 +122,42 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const addNewProduct = async (name, price, description, category_id, img_product) => {
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      try {
+          const formData = new FormData();
+
+          formData.append("name", name);
+          formData.append("price", price);
+          formData.append("description", description);
+          formData.append("category_id", category_id);
+          formData.append("img_product", img_product);
+
+          const res = await axios.post(`${url}/products/createProduct`, formData, {
+            headers: {
+                authorization: token,
+            },
+          });
+
+          console.log(res.data);
+          console.log(res.msg === "Product added");
+
+          if(res.data.msg === "Product added") {
+            dispatch({
+                type: "ADD_NEW_PRODUCT",
+                payload: res.data.product,
+            });
+            return true
+          }
+          else {
+            return false
+          }
+      } catch (error) {
+          console.error(error);
+      }
+    };
+
     const createOrder = async (cart) => {
         try {
             const token = JSON.parse(localStorage.getItem("token"));
@@ -183,7 +219,8 @@ export const ProductProvider = ({ children }) => {
                 createOrder,
                 getProduct,
                 removeCartProduct,
-                deleteProduct
+                deleteProduct,
+                addNewProduct
             }}
         >
             {children}

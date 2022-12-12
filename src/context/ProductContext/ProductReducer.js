@@ -23,6 +23,10 @@ const products = (state, action) => {
                 product: action.payload,
                 loading: false,
             };
+        case "ADD_NEW_PRODUCT":
+            return {
+                ...state
+            };
         case "DELETE_PRODUCT":
             return {
                 ...state,
