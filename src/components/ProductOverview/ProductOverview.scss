@@ -26,9 +26,34 @@
                     text-transform: uppercase;
                 }
 
-                .add-cart {
-                    width: 30%;
+                .buttons-container {
+                    display: flex;
+                    justify-content: space-around;
+                    width: 100%;
+
+                    button {
+                        width: 35%;
+                        display: flex;
+                        align-items: center;
+                        font-family: 14px;
+                        justify-content: center;
+                        gap: 10px;
+
+                        &.favourites {
+                            background-color: rgb(242, 47, 79);
+                            color: white;
+
+                            &:hover {
+                                background-color: rgb(192, 7, 38);
+                            }
+
+                            img {
+                                width: 17px;
+                            }
+                        }
+                    }
                 }
+
             }
         }
 

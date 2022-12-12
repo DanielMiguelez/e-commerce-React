@@ -34,13 +34,18 @@
         text-align: right;
         margin-top: auto;
         margin-bottom: 10px;
-        background-color: #270057;
+        background-color: #0b1b79;
         padding: 0 10px;
         border-radius: 5px 5px 5px 5px;
     }
     
 
 }
+
+.no-products {
+    width: 100%;
+}
+
 .ant-card{
     &:hover{
         background-color: rgba($color: #322aa1, $alpha: 0.7);

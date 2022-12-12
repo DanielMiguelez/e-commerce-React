@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../../context/ProductContext/ProductState";
 import { UserContext } from "../../../context/UserContext/UserState";
 import { printReviewsStar } from "../../../utils/rating";
+import { LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { Image } from "antd";
 import "./ProductReviews.scss";
 import FormReview from "./FormReview/FormReview";
+import { ReviewContext } from "../../../context/ReviewContext/ReviewState";
 
 const ProductReviews = () => {
-    const { product, deleteReview, getProduct } = useContext(ProductContext);
-    const { token, user, getUserInfo } = useContext(UserContext);
-    const [showForm, setShowForm] = useState(false);
+    const { product, getProduct } = useContext(ProductContext);
+    const { deleteReview, getReview } = useContext(ReviewContext);
+    const { token, user, getUserInfo, likeReview, removeLikeReview } = useContext(UserContext);
+    const [ showForm, setShowForm ] = useState(false);
+    const [ editForm, setEditForm ] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,17 +25,23 @@ const ProductReviews = () => {
 
     const goDeleteReview = async (e, review_id) => {
         e.preventDefault();
-        console.log("entra");
-        console.log(review_id);
         await deleteReview(review_id);
         getProduct(product.id);
     };
 
     const showFormReview = () => {
         if (token) {
+            setEditForm(false);
             setShowForm(true);
         } else {
-            navigate("/login");
+            navigate(
+                "/login",
+                {
+                    state: {
+                        nextUrl: `product-overview/${product.id}`
+                    }
+                }
+            );
         }
     };
 
@@ -42,13 +52,40 @@ const ProductReviews = () => {
         return authorIds.includes(user.id);
     };
 
+    const userInReviewLikes = (review) => {
+        if(!user)
+            return false;
+        const userIds = review.ReviewsLiked.map((user) => user.id);
+        return userIds.includes(user.id);
+    };
+
+    const handleReviewLike = async (review) => {
+        if(user) {
+            if(userInReviewLikes(review)) {
+                await removeLikeReview(review.id);
+            } else {
+                await likeReview(review.id);
+            }
+            getProduct(product.id);
+        } else {
+            navigate(
+                "/login",
+                {
+                    state: {
+                        nextUrl: `product-overview/${product.id}`
+                    }
+                }
+            );
+        }
+    }
+
     const reviewsLIst = product.Reviews.map((review, idx) => {
         return (
             <div
                 key={idx}
                 className={
                     user && user.id === review.User.id
-                        ? "review-wrapper order-1 mt-4"
+                        ? `review-wrapper order-1 mt-4 ${editForm ? "d-none" : "d-block"}`
                         : "review-wrapper order-2"
                 }
             >
@@ -63,7 +100,7 @@ const ProductReviews = () => {
                             src={
                                 "http://localhost:3001/" + review.User.user_img
                             }
-                            alt=""
+                            alt="User Img"
                         />
                     </div>
                     <div className="review-desc">
@@ -96,9 +133,19 @@ const ProductReviews = () => {
                                 />
                             </div>
                         ) : null}
+                        <div className="d-flex feedback-buttons">
+                            <button onClick={() => handleReviewLike(review)} className="btn">{userInReviewLikes(review) ? <><span>Remove my like</span> <DislikeOutlined /></> : <><span>Useful opinion</span> <LikeOutlined /></>} <span>({review.ReviewsLiked.length})</span></button>
+                            <button className="btn">Reply <i className="fa fa-reply" aria-hidden="true"></i> </button>
+                            <button className="btn">Report <i className="fa fa-exclamation-triangle" aria-hidden="true"></i> </button>
+                        </div>
                         {user && user.id === review.User.id ? (
                             <div className="d-flex justify-content-center buttons-my-review">
-                                <button className="btn btn-success">
+                                <button onClick={async (e) => {
+                                            await getReview(review.id)
+                                            setEditForm(true);
+                                            setShowForm(true);
+                                        }} 
+                                        className="btn btn-success">
                                     Edit my review
                                 </button>
                                 <button
@@ -118,9 +165,9 @@ const ProductReviews = () => {
     });
     return (
         <>
-            {!userAlreadyReviewProduct() ? (
+            {!userAlreadyReviewProduct() || editForm ? (
                 showForm ? (
-                    <FormReview setShowForm={setShowForm} />
+                    <FormReview setShowForm={setShowForm} editForm={editForm} setEditForm={setEditForm}/>
                 ) : (
                     <div className="d-flex justify-content-center p-4">
                         <button

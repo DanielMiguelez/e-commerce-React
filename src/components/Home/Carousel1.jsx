@@ -3,14 +3,7 @@ import { Carousel } from "antd";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Carousel.scss"
 import { useEffect } from "react";
-const contentStyle = {
-  height: "5px",
-  width:"50%",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
+
 const Carousel1 = () => {
   const { products,getProducts } = useContext(ProductContext);
   const [ filters ] = useState({

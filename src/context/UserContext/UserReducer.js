@@ -19,12 +19,28 @@ const users = (state, action) => {
         token: null,
       };
 
-      case "REGISTER":
+    case "REGISTER":
       return {
         ...state,
         user: null,
         token: null,
       };
+    case "ADD_FAVOURITES":
+        return {
+          ...state
+        };
+    case "REMOVE_FAVOURITES":
+        return {
+          ...state
+        };
+    case "LIKE_REVIEW":
+        return {
+          ...state
+        };
+    case "REMOVE_LIKE_REVIEW":
+        return {
+          ...state
+        };
 
     default:
       return state;

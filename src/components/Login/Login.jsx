@@ -3,10 +3,11 @@ import "./Login.scss";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { Form, Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(UserContext);
+  const { state } = useLocation();
   const [error, setError] = useState("");
   const [help, setHelp] = useState("");
 
@@ -22,7 +23,10 @@ const Login = () => {
   useEffect(() => {
     const foundToken = JSON.parse(localStorage.getItem("token"));
     if (foundToken) {
-      navigate("/profile");
+      if(state && state.nextUrl)
+        navigate(`/${state.nextUrl}`);
+      else 
+        navigate("/profile");
     }
   }, [login]);
 

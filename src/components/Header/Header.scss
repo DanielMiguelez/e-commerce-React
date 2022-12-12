@@ -22,6 +22,19 @@ header{
         &:hover{
             color: yellowgreen;
         }
+
+        .ant-badge {
+            color: white;
+            font-size: 18px;
+        }
+
+        span {
+            color: white;
+
+            &:hover{
+                color: yellowgreen;
+            }
+        }
     }
     button{
         margin: 1vh;
@@ -43,5 +56,9 @@ header{
     }
     .imageUser{
         width: 30px;
+        height: 30px;
+        margin-right: 5px;
+
+        border-radius: 50px;
     }
 }

@@ -1,11 +1,11 @@
 import { createContext, useReducer } from "react";
 import axios from "axios";
 import UserReducer from "./UserReducer";
+
 const token = JSON.parse(localStorage.getItem("token"));
 
 const initialState = {
   token: token ? token : null,
-
   user: null,
 };
 
@@ -90,6 +90,82 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const addProductToFavourites = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/addFavouriteProduct", 
+      { product_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "ADD_FAVOURITES"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  const removeProductFromFavourites = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/removeFavouriteProduct", 
+      { product_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "REMOVE_FAVOURITES"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  const likeReview = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/giveLikeReview", 
+      { review_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "LIKE_REVIEW"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  const removeLikeReview = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      await axios.put(API_URL + "/users/removeLikeReview", 
+      { review_id: id}, 
+      {
+        headers: {
+          authorization: token,
+        }
+      });
+      dispatch({
+        type: "REMOVE_LIKE_REVIEW"
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -99,6 +175,10 @@ export const UserProvider = ({ children }) => {
         logout,
         getUserInfo,
         register,
+        addProductToFavourites,
+        removeProductFromFavourites,
+        likeReview,
+        removeLikeReview
       }}
     >
       {children}
