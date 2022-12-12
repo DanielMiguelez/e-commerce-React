@@ -6,9 +6,7 @@ p:hover{
 
 .cardprofile{
     text-align: center;
-    background-color: rgb(150, 208, 188);
-    border: 3px solid black;
-    
+    background-color: rgba($color: #8948aa, $alpha: 1.0);
 svg{
     margin-bottom: 7px;
 }
@@ -38,11 +36,11 @@ h4{
         padding: 60px;
         flex-direction: column;
         align-items: center;
+        border-right:2px solid blue ;
         margin-top: 7%;
         cursor: pointer;
         font-size: 20px;
     p{
-        background-color: rgb(62, 147, 157);
         padding: 10px;
         border-radius: 5px;
         text-align: center;
@@ -86,7 +84,7 @@ h4{
         width: 70%;
 
         .order-header {
-            background-color: rgb(66, 106, 106);
+            background-color: rgb(38, 189, 189);
             border-radius: 20px 20px 0 0;
             display: flex;
             justify-content: center;

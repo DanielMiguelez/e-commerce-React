@@ -81,8 +81,9 @@ const Profile = () => {
       </div>
       <div className="contentProfile">
         
-        <p className="loggeduser">  <SmileOutlined />YOUR INFO</p>
+        
         {navState === 0 ? (
+          
           <div className="d-flex flex-direction-column justify-content-center w-100 mb-4 ">
             <Card
               className="cardprofile "

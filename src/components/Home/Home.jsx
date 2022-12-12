@@ -14,7 +14,6 @@ const Home = () => {
     <div className="home">
       <h2>Most viewed products</h2>
       <Carousel1 />
-      <hr />
       <div className="footerdiv">
         <div className="item1">
           <h4>Categories</h4>
@@ -32,11 +31,8 @@ const Home = () => {
         <div className="item2">
           <h4>About</h4>
           <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam sint
-          in aperiam eaque, nobis illo modi quo itaque explicabo aliquam rem
-          deleniti et quod error. Magnam magni consequuntur ipsum omnis
-          excepturi enim maiores, adipisci distinctio quas. Doloribus similique
-          voluptatibus autem.
+          Webpage designed to bring the client the best exoerience game-wise, acknlowledged throughout most of the countries in Europe, our desi
+          re is to bring the best videogaming experience, bringing the top notch products to you, our customers. 
         </div>
 
         <div className="item3">
