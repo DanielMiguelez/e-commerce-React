@@ -2,9 +2,9 @@
 
 <h3 align="center">MERN STACK FRONTEND PROJECT</h3>
 
-<p align="center">In this project, we have developed an e-commerce where users will register, log in, view products and create orders using the e-commerce API they created in the 1st Backend Project. </p>
+<p align="center">In this project, we have developed an e-commerce where users will register, log in, view products and create orders. For the requests in this frontend we have used this <a href="https://github.com/radikalex/Proyecto-Backend" target="_blank">backend</a> to make use of its API. </p>
 
-## Objectives
+## Goals of this project
 
 ### Development of an e-commerce using Front and Backend where we will put in practice how to:
 
@@ -29,6 +29,7 @@
     <li>Product Overview</a></li>
     <li>Register</a></li>
     <li>Log in / Log out</a></li>
+    <li>Admin</a></li>
   </ol>
 </views>
 
@@ -45,7 +46,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites to start the project
 
-This is an example of how to list things you need to use the software and how to install them.
+You need to have install NodeJs. This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install
@@ -53,19 +54,20 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app.
+Below is an example of how you can instruct your audience on installing and setting up your app.
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/radikalex/e-commerce-React
-   ```
+    ```sh
+    git clone https://github.com/radikalex/e-commerce-React
+    ```
 2. Install NPM packages
-   ```sh
-   npm install 
-   ```
+    ```sh
+    npm install 
+    ```
 3. Ready to start!
-  ```sh
-  npm start
+    ```sh
+    npm start
+    ```
 
 ## Future Roadmap
 
@@ -73,23 +75,12 @@ _Below is an example of how you can instruct your audience on installing and set
 - [ ] Add more products to the listing
 - [ ] Put in practice the remaining Extra exercises
 
-  ```
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/YourName`)
-3. Commit your Changes (`git commit -m 'Add some YourName'`)
-4. Push to the Branch (`git push origin feature/YourName`)
-5. Open a Pull Request
+  
+  
 
 ## License
 
-This project is under license of Alex Giménez and Daniel Miguélez.
+This project is under license of Alex Jiménez and Daniel Miguélez.
 
 ## Acknowledgments
 
@@ -100,11 +91,19 @@ This space is made to list my favourites E-COMMERCE projects that we have explor
 
 ## Project's review and GIFS
 
-Here we can see both Home andProducts components, and how do they work.
+Here we can see with our gifs, how we did it, and how do they work.
 
-![foto](src/assets/HomeAndProducts.gif)
+### Home preview GIF
 
-![foto](src/assets/Order.gif)
+![foto](src/assets/home1.gif)
+
+### View of products, and selecting different products.
+
+![foto](src/assets/products2.gif)
+
+### Choosing products, putting them into the cart, liking them, and making a purchase.
+
+![foto](src/assets/likesandorders3.gif)
 
 ## Contact 
 
@@ -114,13 +113,17 @@ Daniel Miguelez
     <a href="https://github.com/DanielMiguelez" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </p>
 <p align="center">
-Alex Giménez
+Alex Jiménez
 <a href = "mailto:alexjimenezada@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
     <a href="https://github.com/radikalex" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </p>
+
 ---
-Developed by [Alex Giménez](https://github.com/radikalex) and [Daniel Miguelez](https://github.com/DanielMiguelez)
+
+Developed by [Alex Jiménez](https://github.com/radikalex) and [Daniel Miguelez](https://github.com/DanielMiguelez)
+
 ---
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
