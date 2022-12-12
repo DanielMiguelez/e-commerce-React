@@ -114,7 +114,7 @@ const Profile = () => {
         ) : null}
 
         {navState === 1 ? (
-          <div className="d-flex align-items-center flex-column orders-container">
+          <div className="d-flex align-items-center flex-column orders-container p-10">
             {ordersList}
           </div>
         ) : null}
