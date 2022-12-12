@@ -25,12 +25,18 @@ const products = (state, action) => {
             };
         case "ADD_NEW_PRODUCT":
             return {
-                ...state
+                ...state,
+            };
+        case "UPDATE_PRODUCT":
+            return {
+                ...state,
             };
         case "DELETE_PRODUCT":
             return {
                 ...state,
-                products: state.products.filter(product => product.id !== action.payload.id),
+                products: state.products.filter(
+                    (product) => product.id !== action.payload.id
+                ),
             };
         case "ADD_ONE_CART":
             return {

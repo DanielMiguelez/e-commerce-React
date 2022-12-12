@@ -1,31 +1,33 @@
-.home{
+.home {
     text-align: center;
-    padding-top: 4vh;
+    min-height: 87vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.infohome{
+.infohome {
     margin: 10vh;
 }
-h4{
+h4 {
     align-items: baseline;
 }
-.footerdiv{
+.footerdiv {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: row;
     margin: 50px;
 }
-.item1{
+.item1 {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    margin-right: 25px;
     text-align: justify;
+    width: 20%;
 }
 
-
-.item2{
+.item2 {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -39,7 +41,7 @@ h4{
     border-bottom: white;
 }
 
-.item3{
+.item3 {
     display: flex;
     align-items: center;
     flex-direction: column;
