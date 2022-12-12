@@ -56,14 +56,14 @@ export const ProductProvider = ({ children }) => {
 
     const addOneCart = (product) => {
         let found = false;
-        state.cart.forEach(item => {
-            if(product.id === item.product.id) {
+        state.cart.forEach((item) => {
+            if (product.id === item.product.id) {
                 item.amount++;
                 found = true;
             }
         });
-        if(!found) {
-            state.cart.push({product, amount: 1});
+        if (!found) {
+            state.cart.push({ product, amount: 1 });
         }
         dispatch({
             type: "ADD_ONE_CART",
@@ -73,10 +73,9 @@ export const ProductProvider = ({ children }) => {
 
     const removeOneCart = (product) => {
         for (let i = 0; i < state.cart.length; i++) {
-            if(state.cart[i].product.id === product.id) {
+            if (state.cart[i].product.id === product.id) {
                 state.cart[i].amount--;
-                if(state.cart[i].amount === 0)
-                    state.cart.splice(i, 1);
+                if (state.cart[i].amount === 0) state.cart.splice(i, 1);
                 break;
             }
         }
@@ -88,9 +87,9 @@ export const ProductProvider = ({ children }) => {
 
     const removeCartProduct = (product) => {
         for (let i = 0; i < state.cart.length; i++) {
-            if(state.cart[i].product.id === product.id) {
-              state.cart.splice(i, 1);
-              break;
+            if (state.cart[i].product.id === product.id) {
+                state.cart.splice(i, 1);
+                break;
             }
         }
         dispatch({
@@ -117,54 +116,104 @@ export const ProductProvider = ({ children }) => {
                 type: "GET_PRODUCT",
                 payload: res.data,
             });
+            return res.data;
         } catch (error) {
             console.error(error);
         }
     };
 
-    const addNewProduct = async (name, price, description, category_id, img_product) => {
-      const token = JSON.parse(localStorage.getItem("token"));
+    const addNewProduct = async (
+        name,
+        price,
+        description,
+        category_id,
+        img_product
+    ) => {
+        const token = JSON.parse(localStorage.getItem("token"));
 
-      try {
-          const formData = new FormData();
+        try {
+            const formData = new FormData();
 
-          formData.append("name", name);
-          formData.append("price", price);
-          formData.append("description", description);
-          formData.append("category_id", category_id);
-          formData.append("img_product", img_product);
+            formData.append("name", name);
+            formData.append("price", price);
+            formData.append("description", description);
+            formData.append("category_id", category_id);
+            formData.append("img_product", img_product);
 
-          const res = await axios.post(`${url}/products/createProduct`, formData, {
-            headers: {
-                authorization: token,
-            },
-          });
+            const res = await axios.post(
+                `${url}/products/createProduct`,
+                formData,
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
 
-          console.log(res.data);
-          console.log(res.msg === "Product added");
+            if (res.data.msg === "Product added") {
+                dispatch({
+                    type: "ADD_NEW_PRODUCT",
+                });
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-          if(res.data.msg === "Product added") {
-            dispatch({
-                type: "ADD_NEW_PRODUCT",
-                payload: res.data.product,
-            });
-            return true
-          }
-          else {
-            return false
-          }
-      } catch (error) {
-          console.error(error);
-      }
+    const updateProduct = async (
+        id,
+        name,
+        price,
+        description,
+        category_id,
+        img_product
+    ) => {
+        const token = JSON.parse(localStorage.getItem("token"));
+
+        try {
+            const formData = new FormData();
+
+            formData.append("name", name);
+            formData.append("price", price);
+            formData.append("description", description);
+            formData.append("category_id", category_id);
+            if (img_product) formData.append("img_product", img_product);
+
+            const res = await axios.put(
+                `${url}/products/updateProductById/id/${id}`,
+                formData,
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+
+            console.log(res);
+
+            if (res.data.msg === "Product updated") {
+                dispatch({
+                    type: "UPDATE_PRODUCT",
+                });
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const createOrder = async (cart) => {
         try {
             const token = JSON.parse(localStorage.getItem("token"));
 
-            const products = []
+            const products = [];
             for (const item of cart) {
-                products.push({id: item.product.id, amount: item.amount})
+                products.push({ id: item.product.id, amount: item.amount });
             }
 
             await axios.post(
@@ -189,18 +238,18 @@ export const ProductProvider = ({ children }) => {
                 `${url}/products/deleteProductById/id/${product.id}`,
                 {
                     headers: {
-                      authorization: token,
-                    }
+                        authorization: token,
+                    },
                 }
             );
         } catch (error) {
             console.error(error);
         }
 
-        dispatch( {
+        dispatch({
             type: "DELETE_PRODUCT",
             payload: product,
-        })
+        });
     };
 
     return (
@@ -220,7 +269,8 @@ export const ProductProvider = ({ children }) => {
                 getProduct,
                 removeCartProduct,
                 deleteProduct,
-                addNewProduct
+                addNewProduct,
+                updateProduct,
             }}
         >
             {children}
